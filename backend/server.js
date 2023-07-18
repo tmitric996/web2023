@@ -2,31 +2,33 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs');
 const jwt = require('jsonwebtoken');
+const routes = require('./routes/routes');
 
 const app = express();
 app.use(bodyParser.json());
+app.use('/', routes);
 
 const SECRET_KEY = 'my_secret_key123';
 const USERS_FILE = 'data/users.json';
 
 // Endpoint za registraciju korisnika
-app.post('/register', (req, res) => {
-    const { username, password } = req.body;
-
-    // // Provjeri da li korisnik već postoji
-    const users = getUsers();
-    const existingUser = users.find(user => user.username === username);
-    if (existingUser) {
-        return res.status(409).json({ error: 'Korisnik već postoji' });
-    }
-
-    // Kreiraj novog korisnika
-    const newUser = { username, password };
-    users.push(newUser);
-    saveUsers(users);
-
-    res.json({ message: 'Registracija uspješna' });
-});
+// app.post('/register', (req, res) => {
+//     const { username, password } = req.body;
+//
+//     // // Provjeri da li korisnik već postoji
+//     const users = getUsers();
+//     const existingUser = users.find(user => user.username === username);
+//     if (existingUser) {
+//         return res.status(409).json({ error: 'Korisnik već postoji' });
+//     }
+//
+//     // Kreiraj novog korisnika
+//     const newUser = { username, password };
+//     users.push(newUser);
+//     saveUsers(users);
+//
+//     res.json({ message: 'Registracija uspješna' });
+// });
 
 // Endpoint za prijavu korisnika
 app.post('/login', (req, res) => {

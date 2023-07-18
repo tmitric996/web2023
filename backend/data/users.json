@@ -1,1 +1,30 @@
-[{"username":"user1","password":"1234"},{"username":"user2","password":"1234"},{"username":"user3","password":"1234"}]
+[
+  {
+    "username": "user1",
+    "password": "1234"
+  },
+  {
+    "username": "user2",
+    "password": "1234"
+  },
+  {
+    "username": "user3",
+    "password": "1234"
+  },
+  {
+    "username": "user6",
+    "password": "1234"
+  },
+  {
+    "username": "user9",
+    "password": "1234"
+  },
+  {
+    "username": "user99",
+    "password": "1234",
+    "firstName": "Joki",
+    "lastName": "Poki",
+    "gender": "male",
+    "dateOfBirth": "02.11.1997"
+  }
+]
