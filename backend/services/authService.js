@@ -33,13 +33,21 @@ class AuthService {
         return token;
     }
 
-    verifyToken(token) {
-        try {
-            const decoded = jwt.verify(token, secretKey);
-            return decoded.username;
-        } catch (error) {
-            return null;
+    verifyToken(req, res) {
+        const token = req.headers.authorization;
+        if (!token) {
+            return res.status(401).json({ error: 'Nedostaje JWT token' });
         }
+
+        jwt.verify(token, secretKey, (err, decoded) => {
+            if (err) {
+                return res.status(401).json({ error: 'Neispravan JWT token' });
+            }
+
+            req.user = decoded.username;
+            return res.json({ message: 'Autentičnost potvrđena' });
+
+        });
     }
 
     saveUser(user) {

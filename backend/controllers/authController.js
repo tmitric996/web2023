@@ -62,6 +62,10 @@ const authController = {
         // Implementirajte logiku odjavljivanja korisnika
         return res.status(200).json({ message: 'Uspešno ste se odjavili.' });
     },
+
+    protected(req, res) {
+        authService.verifyToken(req, res)
+    }
 };
 
 module.exports = authController;
