@@ -1,30 +1,178 @@
 [
   {
-    "username": "user1",
-    "password": "1234"
-  },
-  {
-    "username": "user2",
-    "password": "1234"
-  },
-  {
-    "username": "user3",
-    "password": "1234"
-  },
-  {
-    "username": "user6",
-    "password": "1234"
-  },
-  {
-    "username": "user9",
-    "password": "1234"
-  },
-  {
     "username": "user99",
     "password": "1234",
-    "firstName": "Joki",
-    "lastName": "Poki",
+    "firstName": "Mileva",
+    "lastName": "Maric",
+    "gender": "female",
+    "dateOfBirth": "19/12/1875",
+    "role": "USER"
+  },
+  {
+    "username": "user98",
+    "password": "1234",
+    "firstName": "Desanka",
+    "lastName": "Maksimovic",
+    "gender": "female",
+    "dateOfBirth": "16/05/18981",
+    "role": "USER"
+  },
+  {
+    "username": "admin1",
+    "password": "1234",
+    "firstName": "Nikola",
+    "lastName": "Tesla",
     "gender": "male",
-    "dateOfBirth": "02.11.1997"
+    "dateOfBirth": "10/07/1856",
+    "role": "ADMIN"
+  },
+  {
+    "username": "admin2",
+    "password": "1234",
+    "firstName": "Vuk",
+    "lastName": "Karadzic",
+    "gender": "male",
+    "dateOfBirth": "06/11/1787",
+    "role": "ADMIN"
+  },
+  {
+    "username": "kskk",
+    "password": "1234",
+    "firstName": "Leo",
+    "lastName": "beo",
+    "gender": "male",
+    "dateOfBirth": "01/01/2001",
+    "role": "MANAGER",
+    "rentals": null,
+    "cart": null,
+    "carRentalObject": "none",
+    "loyaltyPoints": null,
+    "customerType": null
+  },
+  {
+    "username": "ksksk",
+    "password": "1234",
+    "firstName": "Leo",
+    "lastName": "beo",
+    "gender": "male",
+    "dateOfBirth": "01/01/2001",
+    "role": "MANAGER",
+    "rentals": null,
+    "cart": null,
+    "carRentalObject": "none",
+    "loyaltyPoints": null,
+    "customerType": null
+  },
+  {
+    "username": "lko",
+    "password": "1234",
+    "firstName": "Leo",
+    "lastName": "beo",
+    "gender": "male",
+    "dateOfBirth": "01/01/2001",
+    "role": "MANAGER",
+    "rentals": null,
+    "cart": null,
+    "carRentalObject": "none",
+    "loyaltyPoints": null,
+    "customerType": null
+  },
+  {
+    "username": "leko",
+    "password": "1234",
+    "firstName": "Leo",
+    "lastName": "beo",
+    "gender": "male",
+    "dateOfBirth": "01/01/2001",
+    "role": "MANAGER",
+    "rentals": null,
+    "cart": null,
+    "carRentalObject": "none",
+    "loyaltyPoints": null,
+    "customerType": null
+  },
+  {
+    "username": "lek000o",
+    "password": "1234",
+    "firstName": "Leo",
+    "lastName": "beo",
+    "gender": "male",
+    "dateOfBirth": "01/01/2001",
+    "role": "MANAGER",
+    "rentals": null,
+    "cart": null,
+    "carRentalObject": "none",
+    "loyaltyPoints": null,
+    "customerType": null
+  },
+  {
+    "username": "le9k000o",
+    "password": "1234",
+    "firstName": "Leo",
+    "lastName": "beo",
+    "gender": "male",
+    "dateOfBirth": "01/01/2001",
+    "role": "MANAGER",
+    "rentals": null,
+    "cart": null,
+    "carRentalObject": "none",
+    "loyaltyPoints": null,
+    "customerType": null
+  },
+  {
+    "username": "poo",
+    "password": "1234",
+    "firstName": "Leo",
+    "lastName": "beo",
+    "gender": "male",
+    "dateOfBirth": "01/01/2001",
+    "role": "MANAGER",
+    "rentals": null,
+    "cart": null,
+    "carRentalObject": "none",
+    "loyaltyPoints": null,
+    "customerType": null
+  },
+  {
+    "username": "pmoo",
+    "password": "1234",
+    "firstName": "Leo",
+    "lastName": "beo",
+    "gender": "male",
+    "dateOfBirth": "01/01/2001",
+    "role": "MANAGER",
+    "rentals": null,
+    "cart": null,
+    "carRentalObject": "none",
+    "loyaltyPoints": null,
+    "customerType": null
+  },
+  {
+    "username": "aa",
+    "password": "1234",
+    "firstName": "Leo",
+    "lastName": "beo",
+    "gender": "male",
+    "dateOfBirth": "01/01/2001",
+    "role": "MANAGER",
+    "rentals": null,
+    "cart": null,
+    "carRentalObject": "none",
+    "loyaltyPoints": null,
+    "customerType": null
+  },
+  {
+    "username": "aax",
+    "password": "1234",
+    "firstName": "Lexo",
+    "lastName": "beo",
+    "gender": "male",
+    "dateOfBirth": "01/01/2001",
+    "role": "MANAGER",
+    "rentals": null,
+    "cart": null,
+    "carRentalObject": "none",
+    "loyaltyPoints": null,
+    "customerType": null
   }
 ]

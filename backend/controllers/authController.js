@@ -1,6 +1,7 @@
 // controllers/authController.js
 
 const AuthService = require('../services/authService');
+const User = require('../models/User');
 
 const authService = new AuthService();
 
@@ -21,19 +22,61 @@ const authController = {
         }
 
         // Kreiranje novog korisnika
-        const newUser = {
+        const newUser = new User(
             username,
             password,
             firstName,
             lastName,
             gender,
             dateOfBirth,
-        };
+            'USER',
+            null,
+            null,
+            null,
+            null,
+            null
+    );
 
         // Čuvanje korisnika
         authService.saveUser(newUser);
 
         return res.status(200).json({ message: 'Uspešno ste se registrovali.' });
+    },
+
+    registerManager(req, res) {
+
+        authService.verifyToken(req, res, true);
+        if (res.status==401) {
+            return;
+        }
+
+        const { username, password, firstName, lastName, gender, dateOfBirth, carRentalObject } = req.body;
+
+        if (!username || !password || !firstName || !lastName || !gender || !dateOfBirth) {
+            return res.status(400).json({ message: 'Molimo popunite sva polja.' });
+        }
+        const existingUser = authService.getUserByUsername(username);
+        if (existingUser) {
+            return res.status(400).json({ message: 'Korisničko ime već postoji.' });
+        }
+        const newUser = new User(
+            username,
+            password,
+            firstName,
+            lastName,
+            gender,
+            dateOfBirth,
+            'MANAGER',
+            null,
+            null,
+            carRentalObject,
+            null,
+            null
+        );
+
+        // Čuvanje korisnika
+        authService.saveUser(newUser)
+        return res.status(200).json({ message: 'Uspešno ste registrovali menadzera.' });
     },
 
     login(req, res) {
@@ -55,7 +98,7 @@ const authController = {
         // Generisanje JWT tokena ili drugog oblika autentifikacije
         const token = authService.generateToken(user);
 
-        return res.status(200).json({ token });
+        return res.status(200).json({ token:token, role:user.role });
     },
 
     logout(req, res) {

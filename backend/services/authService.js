@@ -22,6 +22,7 @@ const saveUsers = (users) => {
     fs.writeFileSync(usersFilePath, JSON.stringify(users, null, 2), 'utf8');
 };
 
+
 class AuthService {
     getUserByUsername(username) {
         const users = getUsers();
@@ -29,11 +30,11 @@ class AuthService {
     }
 
     generateToken(user) {
-        const token = jwt.sign({ username: user.username }, secretKey, { expiresIn: '1h' });
+        const token = jwt.sign({ username: user.username, role: user.role }, secretKey, { expiresIn: '1h' });
         return token;
     }
 
-    verifyToken(req, res) {
+    verifyToken(req, res, permission) {
         const token = req.headers.authorization;
         if (!token) {
             return res.status(401).json({ error: 'Nedostaje JWT token' });
@@ -45,8 +46,11 @@ class AuthService {
             }
 
             req.user = decoded.username;
-            return res.json({ message: 'Autentičnost potvrđena' });
-
+            if (permission && decoded.role!='ADMIN') {
+                return res.status(401).json({ error: 'Nemate odgovarajuce permisije' });
+            }
+            req.role = decoded.role;
+            // return res.json({ message: 'Autentičnost potvrđena' });
         });
     }
 
@@ -55,6 +59,7 @@ class AuthService {
         users.push(user);
         saveUsers(users);
     }
+
 
     // Ovde možete dodati i druge funkcije koje su relevantne za autentifikaciju i registraciju korisnika
 }
