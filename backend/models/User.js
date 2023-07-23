@@ -1,5 +1,9 @@
+
 class User {
+    static idCounter = 1;
+
     constructor(username, password, firstName, lastName, gender, dateOfBirth, role, rentals, cart, carRentalObject, loyaltyPoints, customerType) {
+        this.id = User.idCounter++;
         this.username = username;
         this.password = password;
         this.firstName = firstName;

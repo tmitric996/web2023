@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "make": "s",
+    "model": "S",
+    "picture": "s",
+    "numberOfSeats": "s",
+    "numberOfDoors": "S",
+    "typeFuel": "S",
+    "consumption": "S",
+    "type": "s",
+    "description": "description"
+  },
+  {
+    "id": 2,
+    "make": "sss",
+    "model": "S",
+    "picture": "sss",
+    "numberOfSeats": "s",
+    "numberOfDoors": "S",
+    "typeFuel": "S",
+    "consumption": "S",
+    "type": "s",
+    "description": "description"
+  }
+]

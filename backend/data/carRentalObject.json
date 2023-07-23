@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "name": "obj1",
+    "vehicles": null,
+    "workingHour": "s",
+    "status": null,
+    "location": "1",
+    "logo": "logo",
+    "rating": null,
+    "manager": 5
+  },
+  {
+    "id": 2,
+    "name": "obj1",
+    "vehicles": null,
+    "workingHour": "s",
+    "status": null,
+    "location": "1",
+    "logo": "logo",
+    "rating": null,
+    "manager": 5
+  },
+  {
+    "id": 3,
+    "name": "obj1",
+    "vehicles": null,
+    "workingHour": "2",
+    "status": null,
+    "location": "1",
+    "logo": "logo",
+    "rating": null,
+    "manager": 5
+  }
+]

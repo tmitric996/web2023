@@ -1,4 +1,3 @@
-// controllers/authController.js
 
 const AuthService = require('../services/authService');
 const User = require('../models/User');
@@ -45,8 +44,8 @@ const authController = {
 
     registerManager(req, res) {
 
-        authService.verifyToken(req, res, true);
-        if (res.status==401) {
+        authService.verifyToken(req, res, 'ADMIN');
+        if (res.statusCode === 401) {
             return;
         }
 

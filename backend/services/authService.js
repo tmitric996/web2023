@@ -1,4 +1,3 @@
-// services/authService.js
 
 const fs = require('fs');
 const path = require('path');
@@ -46,7 +45,7 @@ class AuthService {
             }
 
             req.user = decoded.username;
-            if (permission && decoded.role!='ADMIN') {
+            if (permission && decoded.role!=permission) {
                 return res.status(401).json({ error: 'Nemate odgovarajuce permisije' });
             }
             req.role = decoded.role;
