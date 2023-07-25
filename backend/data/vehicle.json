@@ -1,26 +1,18 @@
 [
   {
     "id": 1,
-    "make": "s",
-    "model": "S",
-    "picture": "s",
-    "numberOfSeats": "s",
-    "numberOfDoors": "S",
-    "typeFuel": "S",
-    "consumption": "S",
+    "brand": "mn111ko2",
+    "model": "Sff2",
+    "price": "sssddd2222h",
     "type": "s",
-    "description": "description"
-  },
-  {
-    "id": 2,
-    "make": "sss",
-    "model": "S",
-    "picture": "sss",
-    "numberOfSeats": "s",
-    "numberOfDoors": "S",
-    "typeFuel": "S",
+    "rentalObject": "Sj",
+    "transmission": "S",
+    "fuelType": "S",
     "consumption": "S",
-    "type": "s",
+    "numberOfDoors": "s",
+    "numberOfPersons": "description",
+    "image": "description",
+    "status": "description",
     "description": "description"
   }
 ]

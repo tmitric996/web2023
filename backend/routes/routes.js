@@ -14,5 +14,7 @@ router.post('/facility', carRentalObjectController.addFacility);
 router.get('/facility', carRentalObjectController.getFacility);
 
 router.post('/vehicle', vehicleController.addVehicle);
+router.put('/vehicle/:id', vehicleController.updateVehicle);
+router.delete('/vehicle/:id', vehicleController.deleteVehicle);
 
 module.exports = router;
