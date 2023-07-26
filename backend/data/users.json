@@ -174,5 +174,19 @@
     "carRentalObject": "none",
     "loyaltyPoints": null,
     "customerType": null
+  },
+  {
+    "username": "user1",
+    "password": "1234",
+    "firstName": "Lexo",
+    "lastName": "beo",
+    "gender": "male",
+    "dateOfBirth": "01/01/2001",
+    "role": "USER",
+    "rentals": null,
+    "cart": null,
+    "carRentalObject": "none",
+    "loyaltyPoints": null,
+    "customerType": null
   }
 ]

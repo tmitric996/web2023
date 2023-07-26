@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "vehicles": [
+      2
+    ],
+    "carRentalObject": 1,
+    "dateAndTime": "some date",
+    "duration": 2,
+    "price": 112,
+    "customer": 10,
+    "status": "pending"
+  }
+]
