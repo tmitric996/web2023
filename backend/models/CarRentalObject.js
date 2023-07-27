@@ -12,6 +12,7 @@ class CarRentalObject {
         this.logo = logo;
         this.rating = rating;
         this.manager = manager;
+        this.active = true;
     }
 }
 

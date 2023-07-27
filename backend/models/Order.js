@@ -3,7 +3,7 @@ class Order {
     static idCounter = 1;
 
     constructor(vehicles, carRentalObject, dateAndTime, duration, price, customer, status) {
-        this.id = Order.idCounter++;
+        this.id = Date.now() + Order.idCounter++;
         this.vehicles = vehicles;
         this.carRentalObject = carRentalObject;
         this.dateAndTime = dateAndTime;
@@ -11,6 +11,8 @@ class Order {
         this.price = price;
         this.customer = customer;
         this.status = status;
+        this.active = true;
+
     }
 
 }

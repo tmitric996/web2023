@@ -35,5 +35,19 @@
     "price": 112,
     "customer": 11,
     "status": "pending"
+  },
+  {
+    "id": 1690495219998,
+    "vehicles": [
+      3,
+      1
+    ],
+    "carRentalObject": 2,
+    "dateAndTime": "some date",
+    "duration": 2,
+    "price": 112,
+    "customer": 10,
+    "status": "pending",
+    "active": true
   }
 ]

@@ -17,6 +17,8 @@ class Vehicle {
         this.image = image;
         this.status = status;
         this.description = description? description:null;
+        this.active = true;
+
     }
 
 }

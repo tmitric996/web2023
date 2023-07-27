@@ -16,6 +16,7 @@ class User {
         this.carRentalObject = carRentalObject;
         this.loyaltyPoints = loyaltyPoints;
         this.customerType = customerType;
+        this.active = true;
 
     }
 }

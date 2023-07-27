@@ -107,6 +107,16 @@ const authController = {
 
     protected(req, res) {
         authService.verifyToken(req, res)
+    },
+
+    getUserProfile(req, res) {
+        authService.verifyToken(req, res, 'USER MANAGER ADMIN');
+        if (res.statusCode === 401) {
+            return;
+        }
+        const userProfile = authService.getUserBy('id', parseInt(req.params.id));
+        return res.status(200).json({ user :userProfile });
+
     }
 };
 

@@ -17,6 +17,18 @@ const getUsers = () => {
     }
 };
 
+const getUserBy= (param, id) => {
+    try {
+        const userData = fs.readFileSync(usersFilePath, 'utf8');
+        const users = JSON.parse(userData);
+        const user = users.filter(user => user[param] === id);
+
+        return user || null;
+    } catch (error) {
+        return null;
+    }
+}
+
 const saveUsers = (users) => {
     fs.writeFileSync(usersFilePath, JSON.stringify(users, null, 2), 'utf8');
 };
@@ -45,7 +57,7 @@ class AuthService {
             }
 
             req.user = decoded.username;
-            if (permission && decoded.role!=permission) {
+            if (permission && !permission.includes(decoded.role)) {
                 return res.status(401).json({ error: 'Nemate odgovarajuce permisije' });
             }
             req.role = decoded.role;
@@ -59,6 +71,10 @@ class AuthService {
         saveUsers(users);
     }
 
+    getUserBy(param, value) {
+        const user = getUserBy(param, value);
+        return user;
+    }
 
     // Ovde možete dodati i druge funkcije koje su relevantne za autentifikaciju i registraciju korisnika
 }

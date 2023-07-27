@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "username": "user99",
     "password": "1234",
     "firstName": "Mileva",
@@ -9,6 +10,7 @@
     "role": "USER"
   },
   {
+    "id": 2,
     "username": "user98",
     "password": "1234",
     "firstName": "Desanka",
@@ -18,6 +20,7 @@
     "role": "USER"
   },
   {
+    "id": 3,
     "username": "admin1",
     "password": "1234",
     "firstName": "Nikola",
@@ -78,6 +81,7 @@
     "customerType": null
   },
   {
+    "id": 8,
     "username": "leko",
     "password": "1234",
     "firstName": "Leo",
@@ -148,6 +152,7 @@
     "customerType": null
   },
   {
+    "id": 11,
     "username": "aa",
     "password": "1234",
     "firstName": "Leo",

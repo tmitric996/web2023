@@ -14,5 +14,38 @@
     "image": "description",
     "status": "description",
     "description": "description"
+  },
+  {
+    "id": 1,
+    "brand": "ssskkkk22",
+    "model": "S",
+    "price": "sss",
+    "type": "s",
+    "rentalObject": "S",
+    "transmission": "S",
+    "fuelType": "S",
+    "consumption": "S",
+    "numberOfDoors": "s",
+    "numberOfPersons": "description",
+    "image": "description",
+    "status": "description",
+    "description": "description"
+  },
+  {
+    "id": 1,
+    "brand": "okjhnbvc",
+    "model": "S",
+    "price": "sss",
+    "type": "s",
+    "rentalObject": "S",
+    "transmission": "S",
+    "fuelType": "S",
+    "consumption": "S",
+    "numberOfDoors": "s",
+    "numberOfPersons": "description",
+    "image": "description",
+    "status": "description",
+    "description": "description",
+    "active": true
   }
 ]
