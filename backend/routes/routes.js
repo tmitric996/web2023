@@ -19,8 +19,8 @@ router.put('/vehicle/:id', vehicleController.updateVehicle);
 router.delete('/vehicle/:id', vehicleController.deleteVehicle);
 
 router.post('/order', orderController.addOrder);
-router.get('/order/user', orderController.getUserOrder);
-router.get('/order/object', orderController.getObjectOrder);
+router.get('/order/customer/:id', orderController.getUserOrder);
+router.get('/order/object/:id', orderController.getObjectOrder);
 
 
 module.exports = router;

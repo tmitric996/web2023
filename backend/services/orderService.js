@@ -35,9 +35,8 @@ const getOrderBy= (entity, id) => {
     try {
         const orderData = fs.readFileSync(orderFilePath, 'utf8');
         const orders = JSON.parse(orderData);
-        const indexToUpdate = orders.findIndex((order) => order.entity ===  parseInt(id));
+        const order = orders.filter(order => order[entity] === id);
 
-        const order = orders[indexToUpdate];
         return order || null;
     } catch (error) {
         return null;
@@ -53,7 +52,7 @@ class orderService {
 
     getOrdersForUser(id) {
         try {
-            const orders = getOrderBy('user', id);
+            const orders = getOrderBy('customer', id);
             return orders || null;
         } catch (error) {
             return null;

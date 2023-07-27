@@ -41,7 +41,7 @@ const orderController = {
         const id = parseInt(req.params.id);
 
         const orders = orderService.getOrdersForUser(id);
-        return res.status(200).json({ orders:orders });
+        return res.status(200).json({ orders: orders });
     },
 
     getObjectOrder(req, res) {

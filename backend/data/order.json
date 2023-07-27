@@ -10,5 +10,30 @@
     "price": 112,
     "customer": 10,
     "status": "pending"
+  },
+  {
+    "id": 2,
+    "vehicles": [
+      3,
+      1
+    ],
+    "carRentalObject": 2,
+    "dateAndTime": "some date",
+    "duration": 2,
+    "price": 112,
+    "customer": 10,
+    "status": "pending"
+  },
+  {
+    "id": 3,
+    "vehicles": [
+      1
+    ],
+    "carRentalObject": 1,
+    "dateAndTime": "some date",
+    "duration": 2,
+    "price": 112,
+    "customer": 11,
+    "status": "pending"
   }
 ]
