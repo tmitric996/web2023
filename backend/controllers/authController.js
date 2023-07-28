@@ -101,7 +101,6 @@ const authController = {
     },
 
     logout(req, res) {
-        // Implementirajte logiku odjavljivanja korisnika
         return res.status(200).json({ message: 'Uspešno ste se odjavili.' });
     },
 

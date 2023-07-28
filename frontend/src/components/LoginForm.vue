@@ -1,15 +1,27 @@
 <template>
-  <div>
-    <h2>Login Form</h2>
-    <form @submit="loginUser">
-      <input type="text" v-model="username" placeholder="Username" required>
-      <input type="password" v-model="password" placeholder="Password" required>
-      <button type="submit">Login</button>
-    </form>
+  <div class="container mt-5">
+    <div class="card p-4 shadow-lg">
+      <h2 class="mb-4 text-center">Login Form</h2>
+      <form @submit="loginUser">
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input type="text" class="form-control" v-model="username" id="username" required>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" v-model="password" id="password" required>
+        </div>
+        <div class="d-grid gap-2 mt-4">
+          <button type="submit" class="btn btn-primary">Login</button>
+        </div>
+      </form>
+    </div>
   </div>
 </template>
 
 <script>
+import '../../public/assets/styles.css';
+
 export default {
   data() {
     return {
@@ -19,10 +31,7 @@ export default {
   },
   methods: {
     loginUser() {
-      // Logika za prijavljivanje korisnika
-      // Ovde možete pozvati API endpoint za prijavljivanje korisnika na serveru
-      // Koristite this.username i this.password za dobijanje unetih vrednosti
-    },
+      },
   },
 };
 </script>

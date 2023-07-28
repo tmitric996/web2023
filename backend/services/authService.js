@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
 const usersFilePath = path.join(__dirname, '../data/users.json');
-const secretKey = 'my_secret_key'; // Tajni ključ za potpisivanje JWT tokena
+const secretKey = 'my_secret_key';
 
 const getUsers = () => {
     try {
@@ -76,7 +76,6 @@ class AuthService {
         return user;
     }
 
-    // Ovde možete dodati i druge funkcije koje su relevantne za autentifikaciju i registraciju korisnika
 }
 
 module.exports = AuthService;

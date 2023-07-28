@@ -10,7 +10,6 @@ app.use('/', routes);
 
 const USERS_FILE = 'data/users.json';
 
-// Pomoćne funkcije za čitanje i pisanje korisnika u JSON fajl
 function getUsers() {
     const usersData = fs.readFileSync(USERS_FILE);
     return JSON.parse(usersData);
@@ -21,7 +20,6 @@ function saveUsers(users) {
     fs.writeFileSync(USERS_FILE, data);
 }
 
-// Pokretanje servera
 const PORT = 3000;
 app.listen(PORT, () => {
     console.log(`Server pokrenut na portu ${PORT}`);
