@@ -13,10 +13,11 @@
     "numberOfPersons": "description",
     "image": "description",
     "status": "description",
-    "description": "description"
+    "description": "description",
+    "active": true
   },
   {
-    "id": 1,
+    "id": 2,
     "brand": "ssskkkk22",
     "model": "S",
     "price": "sss",
@@ -29,10 +30,11 @@
     "numberOfPersons": "description",
     "image": "description",
     "status": "description",
-    "description": "description"
+    "description": "description",
+    "active": false
   },
   {
-    "id": 1,
+    "id": 3,
     "brand": "okjhnbvc",
     "model": "S",
     "price": "sss",

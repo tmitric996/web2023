@@ -64,7 +64,8 @@ class vehicleService {
             if (indexToDelete === -1) {
                 return false;
             }
-            vehicles.splice(indexToDelete, 1);
+            const deletedVehicle = { ...vehicles[indexToDelete], ...{active: false} };
+            vehicles[indexToDelete] = deletedVehicle;
             saveVehicles(vehicles);
             return true;
         } catch (error) {
