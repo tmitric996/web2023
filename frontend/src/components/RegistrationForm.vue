@@ -79,7 +79,7 @@
           </div>
           <div class="modal-body">
             <p v-if="registrationStatus === 'success'">Congratulations! You have successfully registered.</p>
-            <p v-else-if="registrationStatus === 'error'">Oops! Something went wrong during registration.</p>
+            <p v-else-if="registrationStatus === 'error'">{{ errorMessage }}</p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary" @click="closeModal">Close</button>
@@ -108,6 +108,7 @@ export default {
       dateOfBirth: '',
       registrationStatus: null,
       isModalShown: false,
+      errorMessage: "Oops! Something went wrong during registration."
     };
   },
   computed: {
@@ -141,7 +142,15 @@ export default {
         return;
 
       } catch (error) {
-        console.error('Greška prilikom slanja zahteva:', error);
+        this.registrationStatus = 'error';
+        if (error.response && error.response.data && error.response.data.message) {
+          this.errorMessage = error.response.data.message;
+        } else {
+          this.errorMessage = "Oops! Something went wrong during registration.";
+        }
+        this.showModal();
+
+        console.log('Došlo je do greške prilikom registracije korisnika.');
       }
     },
     togglePasswordVisibility(field) {
@@ -158,15 +167,25 @@ export default {
       }
     },
     showModal() {
-      const modal = new bootstrap.Modal(this.$refs.registrationModal);
+      const modal = new bootstrap.Modal(this.$refs.registrationModal, {backdrop: 'static',});
       modal.show();
       this.isModalShown=true;
     },
 
     closeModal() {
       const modal = new bootstrap.Modal(this.$refs.registrationModal);
-      modal.hide();
+      modal.dispose();
       this.isModalShown=false;
+      const backdrop = document.querySelector('.modal-backdrop');
+      if (backdrop) {
+        backdrop.parentNode.removeChild(backdrop);
+      }
+      if (this.registrationStatus === 'success'){
+        this.$router.push('/');
+      } else {
+        location.reload();
+      }
+
     },
   },
 };
