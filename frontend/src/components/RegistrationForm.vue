@@ -93,8 +93,10 @@
 <script>
 import '../../public/assets/styles.css';
 import axios from 'axios';
+import baseMixin from "../common/baseMixin";
 
 export default {
+  mixins: [baseMixin],
   data() {
     return {
       showPassword : true,
@@ -122,7 +124,7 @@ export default {
         return;
       }
       try {
-        const response = await axios.post('http://localhost:3000/register', {
+        const response = await axios.post(this.basePath+'register', {
           username: this.username,
           password: this.password,
           firstName: this.firstName,
