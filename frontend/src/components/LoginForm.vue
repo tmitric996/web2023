@@ -45,9 +45,9 @@
 </template>
 
 <script>
-import baseMixin from '../common/baseMixin.js';
 import '../../public/assets/styles.css';
 import axios from "axios";
+import baseMixin from '../common/baseMixin.js';
 
 export default {
   mixins: [baseMixin],
@@ -68,8 +68,12 @@ export default {
           password: this.password,
         });
         if (response.status === 200) {
-          console.log('Korisnik je uspešno ulogovan.');
-          await this.$router.push('/');
+          console.log('Korisnik je uspešno ulogovan.', response);
+          localStorage.setItem('token', response.data.token);
+          localStorage.setItem('username', this.username);
+          localStorage.setItem('role', response.data.role);
+
+          // await this.$router.push('/');
 
         } else {
           console.log('Došlo je do greške prilikom prijave korisnika.');
@@ -85,7 +89,7 @@ export default {
         console.log('Došlo je do greške prilikom registracije korisnika.', error);
 
       }
-      },
+    },
     closeModal() {
       const modal = new bootstrap.Modal(this.$refs.loginModal);
       modal.dispose();

@@ -61,6 +61,13 @@
             <option value="other">Other</option>
           </select>
         </div>
+        <div class="mb-3" v-if="userRole === 'ADMIN'">
+          <label for="carRentalObject" class="form-label">Rental object for menagment</label>
+          <select class="form-select" v-model="carRentalObject" id="carRentalObject" required>
+            <option value="1">1</option>
+            <option value="2">2</option>
+          </select>
+        </div>
         <div class="mb-3">
           <label for="dateOfBirth" class="form-label">Date of Birth</label>
           <input type="date" class="form-control" v-model="dateOfBirth" id="dateOfBirth" required>
@@ -78,7 +85,8 @@
             <h5 class="modal-title" v-else-if="registrationStatus === 'error'">Registration Error</h5>
           </div>
           <div class="modal-body">
-            <p v-if="registrationStatus === 'success'">Congratulations! You have successfully registered.</p>
+            <p v-if="registrationStatus === 'success' && userRole!== 'ADMIN'">Congratulations! You have successfully registered.</p>
+            <p v-if="registrationStatus === 'success' && userRole=== 'ADMIN'">Congratulations! You have successfully registered new manager.</p>
             <p v-else-if="registrationStatus === 'error'">{{ errorMessage }}</p>
           </div>
           <div class="modal-footer">
@@ -93,6 +101,7 @@
 <script>
 import '../../public/assets/styles.css';
 import axios from 'axios';
+import headerModule from '../auth/header.js';;
 import baseMixin from "../common/baseMixin";
 
 export default {
@@ -110,7 +119,9 @@ export default {
       dateOfBirth: '',
       registrationStatus: null,
       isModalShown: false,
-      errorMessage: "Oops! Something went wrong during registration."
+      errorMessage: "Oops! Something went wrong during registration.",
+      userRole: localStorage.getItem('role')? localStorage.getItem('role') : null,
+      carRentalObject: "1"
     };
   },
   computed: {
@@ -123,6 +134,11 @@ export default {
       if (this.passwordMismatch) {
         return;
       }
+      let headers = {};
+
+      if (this.userRole === 'ADMIN') {
+        headers = headerModule.header;
+      }
       try {
         const response = await axios.post(this.basePath+'register', {
           username: this.username,
@@ -130,7 +146,11 @@ export default {
           firstName: this.firstName,
           lastName: this.lastName,
           gender: this.gender,
-          dateOfBirth: this.dateOfBirth
+          dateOfBirth: this.dateOfBirth,
+          carRentalObject: this.carRentalObject? this.carRentalObject : null,
+          //todo fix carrentalobject value from driodown, set user role to be manager for case when adim is adding user
+        }, {
+          headers: headers,
         });
 
         if (response.status === 200) {

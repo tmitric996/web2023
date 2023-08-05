@@ -49,7 +49,7 @@ const authController = {
             return;
         }
 
-        const { username, password, firstName, lastName, gender, dateOfBirth, carRentalObject } = req.body;
+        const { username, password, firstName, lastName, gender, dateOfBirth, carRentalObject, role } = req.body;
 
         if (!username || !password || !firstName || !lastName || !gender || !dateOfBirth) {
             return res.status(400).json({ message: 'Molimo popunite sva polja.' });
@@ -65,10 +65,10 @@ const authController = {
             lastName,
             gender,
             dateOfBirth,
-            'MANAGER',
+            role? role :'USER',
             null,
             null,
-            carRentalObject,
+            carRentalObject? carRentalObject:null,
             null,
             null
         );
