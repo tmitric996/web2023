@@ -62,10 +62,10 @@
           </select>
         </div>
         <div class="mb-3" v-if="userRole === 'ADMIN'">
-          <label for="carRentalObject" class="form-label">Rental object for menagment</label>
+          <label for="carRentalObject" class="form-label">Rental object for management</label>
           <select class="form-select" v-model="carRentalObject" id="carRentalObject" required>
-            <option value="1">1</option>
-            <option value="2">2</option>
+            <option value="" disabled>Select a rental object</option>
+            <option v-for="rentalObject in carRentalObjects" :key="rentalObject.id" :value="rentalObject.id">{{ rentalObject.name +" "+ rentalObject.logo}}</option>
           </select>
         </div>
         <div class="mb-3">
@@ -121,8 +121,12 @@ export default {
       isModalShown: false,
       errorMessage: "Oops! Something went wrong during registration.",
       userRole: localStorage.getItem('role')? localStorage.getItem('role') : null,
-      carRentalObject: "1"
+      carRentalObject: "1",
+      carRentalObjects: []
     };
+  },
+  async created() {
+    await this.getCarRentalObjects();
   },
   computed: {
     passwordMismatch() {
@@ -130,6 +134,11 @@ export default {
     },
   },
   methods: {
+    async getCarRentalObjects() {
+      const response = await axios.get(this.basePath + 'facility');
+      this.carRentalObjects = response.data.facilities;
+      console.log("drugi", this.carRentalObjects);
+    },
     async registerUser() {
       if (this.passwordMismatch) {
         return;
@@ -139,6 +148,7 @@ export default {
       if (this.userRole === 'ADMIN') {
         headers = headerModule.header;
       }
+      console.log("values", this.carRentalObject, this.gender);
       try {
         const response = await axios.post(this.basePath+'register', {
           username: this.username,
@@ -148,7 +158,7 @@ export default {
           gender: this.gender,
           dateOfBirth: this.dateOfBirth,
           carRentalObject: this.carRentalObject? this.carRentalObject : null,
-          //todo fix carrentalobject value from driodown, set user role to be manager for case when adim is adding user
+          role: this.userRole === 'ADMIN'? 'MANAGER' : 'USER',
         }, {
           headers: headers,
         });
@@ -172,7 +182,7 @@ export default {
         }
         this.showModal();
 
-        console.log('Došlo je do greške prilikom registracije korisnika.');
+        console.log('Došlo je do greške prilikom registracije korisnika.', error);
       }
     },
     togglePasswordVisibility(field) {

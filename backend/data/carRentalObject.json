@@ -12,23 +12,23 @@
   },
   {
     "id": 2,
-    "name": "obj1",
+    "name": "obj2",
     "vehicles": null,
     "workingHour": "s",
     "status": null,
     "location": "1",
-    "logo": "logo",
+    "logo": "logo2",
     "rating": null,
     "manager": 5
   },
   {
     "id": 3,
-    "name": "obj1",
+    "name": "obj3",
     "vehicles": null,
     "workingHour": "2",
     "status": null,
     "location": "1",
-    "logo": "logo",
+    "logo": "logo3",
     "rating": null,
     "manager": 5
   }
