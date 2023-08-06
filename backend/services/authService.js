@@ -17,6 +17,17 @@ const getUsers = () => {
     }
 };
 
+const getManagers = () => {
+    try {
+        const usersData = fs.readFileSync(usersFilePath, 'utf8');
+        const users = JSON.parse(usersData);
+        const managers = users.filter(user => user.role === 'MANAGER');
+        return managers || null;
+    } catch (error) {
+        return [];
+    }
+};
+
 const getUserBy= (param, id) => {
     try {
         const userData = fs.readFileSync(usersFilePath, 'utf8');
@@ -38,6 +49,11 @@ class AuthService {
     getUserByUsername(username) {
         const users = getUsers();
         return users.find((user) => user.username === username);
+    }
+
+    getAllManagers() {
+        const managers = getManagers();
+        return managers;
     }
 
     generateToken(user) {

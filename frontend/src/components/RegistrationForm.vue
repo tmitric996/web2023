@@ -61,13 +61,6 @@
             <option value="other">Other</option>
           </select>
         </div>
-        <div class="mb-3" v-if="userRole === 'ADMIN'">
-          <label for="carRentalObject" class="form-label">Rental object for management</label>
-          <select class="form-select" v-model="carRentalObject" id="carRentalObject" required>
-            <option value="" disabled>Select a rental object</option>
-            <option v-for="rentalObject in carRentalObjects" :key="rentalObject.id" :value="rentalObject.id">{{ rentalObject.name +" "+ rentalObject.logo}}</option>
-          </select>
-        </div>
         <div class="mb-3">
           <label for="dateOfBirth" class="form-label">Date of Birth</label>
           <input type="date" class="form-control" v-model="dateOfBirth" id="dateOfBirth" required>
@@ -101,7 +94,7 @@
 <script>
 import '../../public/assets/styles.css';
 import axios from 'axios';
-import headerModule from '../auth/header.js';;
+import headerModule from '../auth/header.js';
 import baseMixin from "../common/baseMixin";
 
 export default {
@@ -121,12 +114,7 @@ export default {
       isModalShown: false,
       errorMessage: "Oops! Something went wrong during registration.",
       userRole: localStorage.getItem('role')? localStorage.getItem('role') : null,
-      carRentalObject: "1",
-      carRentalObjects: []
     };
-  },
-  async created() {
-    await this.getCarRentalObjects();
   },
   computed: {
     passwordMismatch() {
@@ -134,11 +122,6 @@ export default {
     },
   },
   methods: {
-    async getCarRentalObjects() {
-      const response = await axios.get(this.basePath + 'facility');
-      this.carRentalObjects = response.data.facilities;
-      console.log("drugi", this.carRentalObjects);
-    },
     async registerUser() {
       if (this.passwordMismatch) {
         return;
@@ -148,7 +131,6 @@ export default {
       if (this.userRole === 'ADMIN') {
         headers = headerModule.header;
       }
-      console.log("values", this.carRentalObject, this.gender);
       try {
         const response = await axios.post(this.basePath+'register', {
           username: this.username,
@@ -157,7 +139,6 @@ export default {
           lastName: this.lastName,
           gender: this.gender,
           dateOfBirth: this.dateOfBirth,
-          carRentalObject: this.carRentalObject? this.carRentalObject : null,
           role: this.userRole === 'ADMIN'? 'MANAGER' : 'USER',
         }, {
           headers: headers,

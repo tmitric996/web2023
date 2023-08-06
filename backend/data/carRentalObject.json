@@ -31,5 +31,17 @@
     "logo": "logo3",
     "rating": null,
     "manager": 5
+  },
+  {
+    "id": 1,
+    "name": "sad",
+    "vehicles": null,
+    "workingHour": "sad",
+    "status": null,
+    "location": "asd",
+    "logo": "sad",
+    "rating": null,
+    "manager": 11,
+    "active": true
   }
 ]

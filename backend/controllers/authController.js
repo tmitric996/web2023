@@ -42,41 +42,6 @@ const authController = {
         return res.status(200).json({ message: 'Uspešno ste se registrovali.' });
     },
 
-    // registerManager(req, res) {
-    //
-    //     authService.verifyToken(req, res, 'ADMIN');
-    //     if (res.statusCode === 401) {
-    //         return;
-    //     }
-    //
-    //     const { username, password, firstName, lastName, gender, dateOfBirth, carRentalObject, role } = req.body;
-    //
-    //     if (!username || !password || !firstName || !lastName || !gender || !dateOfBirth) {
-    //         return res.status(400).json({ message: 'Molimo popunite sva polja.' });
-    //     }
-    //     const existingUser = authService.getUserByUsername(username);
-    //     if (existingUser) {
-    //         return res.status(400).json({ message: 'Korisničko ime već postoji.' });
-    //     }
-    //     const newUser = new User(
-    //         username,
-    //         password,
-    //         firstName,
-    //         lastName,
-    //         gender,
-    //         dateOfBirth,
-    //         role? role :'USER',
-    //         null,
-    //         null,
-    //         carRentalObject? carRentalObject:null,
-    //         null,
-    //         null
-    //     );
-    //
-    //     // Čuvanje korisnika
-    //     authService.saveUser(newUser)
-    //     return res.status(200).json({ message: 'Uspešno ste registrovali menadzera.' });
-    // },
 
     login(req, res) {
         // Uzimanje podataka iz tela zahteva
@@ -116,6 +81,15 @@ const authController = {
         const userProfile = authService.getUserBy('id', parseInt(req.params.id));
         return res.status(200).json({ user :userProfile });
 
+    },
+
+    getManagers(req, res) {
+        authService.verifyToken(req, res, 'ADMIN');
+        if (res.statusCode === 401) {
+            return;
+        }
+        const managers = authService.getAllManagers();
+        return res.status(200).json({ managers :managers });
     }
 };
 
