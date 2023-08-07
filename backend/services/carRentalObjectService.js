@@ -57,6 +57,10 @@ class carRentalObjectService {
         return carRentalObjects;
     };
 
+    getObjects() {
+        const carRentalObjects = getCarRentalObjects();
+        return carRentalObjects;
+    }
 
 }
 module.exports = carRentalObjectService;

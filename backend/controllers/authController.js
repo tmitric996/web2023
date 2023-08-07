@@ -88,9 +88,15 @@ const authController = {
         if (res.statusCode === 401) {
             return;
         }
-        const managers = authService.getAllManagers();
+        let managers = []
+            if (req.route.path.includes('free')) {
+                managers = authService.getAllManagers('free');
+            } else {
+                managers = authService.getAllManagers();
+            }
         return res.status(200).json({ managers :managers });
-    }
+    },
+
 };
 
 module.exports = authController;

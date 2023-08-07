@@ -10,6 +10,7 @@ router.post('/register', authController.register);
 router.post('/login', authController.login);
 router.get('/protected', authController.protected);
 router.get('/managers', authController.getManagers);
+router.get('/managers/free', authController.getManagers);
 router.get('/profile/:id', authController.getUserProfile);
 
 router.post('/facility', carRentalObjectController.addFacility);

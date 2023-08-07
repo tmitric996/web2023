@@ -58,17 +58,15 @@ export default {
   methods: {
     async fetchManagers() {
       try {
-        const response = await axios.get(this.basePath + 'managers', {
+        const response = await axios.get(this.basePath + 'managers/free', {
           headers: headerModule.header}); // Fetch managers from the API
         this.managers = response.data.managers;
-        console.log('managers:', response);
       } catch (error) {
         console.error('Error fetching managers:', error);
       }
     },
     async createCarRentalObject() {
       try {
-        console.log("this.manager",this.manager);
         const response = await axios.post(this.basePath + 'facility', {
           name: this.name,
           location: this.location,

@@ -4,6 +4,8 @@ const path = require('path');
 const jwt = require('jsonwebtoken');
 
 const User = require('../models/User');
+const CarRentalObjectService = require('./carRentalObjectService');
+const carRentalObjectService = new CarRentalObjectService();
 
 const usersFilePath = path.join(__dirname, '../data/users.json');
 const secretKey = 'my_secret_key';
@@ -17,11 +19,22 @@ const getUsers = () => {
     }
 };
 
-const getManagers = () => {
+const getManagers = (free) => {
     try {
         const usersData = fs.readFileSync(usersFilePath, 'utf8');
         const users = JSON.parse(usersData);
-        const managers = users.filter(user => user.role === 'MANAGER');
+        let managers = users.filter(user => user.role === 'MANAGER');
+        if (free) {
+            const objects = carRentalObjectService.getObjects();
+            let occupiedManagers = [];
+            objects.forEach(object => {
+                occupiedManagers.push(object.manager);
+            });
+            managers = managers.filter(manager => {
+                if (!occupiedManagers.includes(manager.id)){
+                    return true;
+                }});
+        }
         return managers || null;
     } catch (error) {
         return [];
@@ -51,8 +64,13 @@ class AuthService {
         return users.find((user) => user.username === username);
     }
 
-    getAllManagers() {
-        const managers = getManagers();
+    getAllManagers(free) {
+        let managers = [];
+        if (free) {
+            managers = getManagers(free);
+        } else {
+            managers = getManagers();
+        }
         return managers;
     }
 
