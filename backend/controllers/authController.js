@@ -39,7 +39,7 @@ const authController = {
         // Čuvanje korisnika
         authService.saveUser(newUser);
 
-        return res.status(200).json({ message: 'Uspešno ste se registrovali.' });
+        return res.status(200).json({ message: 'Uspešno ste se registrovali.', user: newUser });
     },
 
 

@@ -21,7 +21,7 @@
         </div>
         <div class="mb-3">
           <label for="manager" class="form-label">Manager</label>
-          <select class="form-select" v-model="manager" id="manager" required>
+          <select class="form-select" v-model="manager" id="manager" >
             <option v-for="manager in managers" :key="manager.id" :value="manager.id">{{ manager.username }}</option>
           </select>
         </div>
@@ -43,6 +43,7 @@ export default {
   mixins: [baseMixin],
   data() {
     return {
+      emptyManagers: false,
       name: '',
       location: '',
       workingHours: '',
@@ -61,10 +62,15 @@ export default {
         const response = await axios.get(this.basePath + 'managers/free', {
           headers: headerModule.header}); // Fetch managers from the API
         this.managers = response.data.managers;
+        console.log("this.managers.isEmpty", this.managers.length, this.managers )
+        if (this.managers.length===0) {
+          this.emptyManagers = true;
+        }
       } catch (error) {
         console.error('Error fetching managers:', error);
       }
     },
+
     async createCarRentalObject() {
       try {
         const response = await axios.post(this.basePath + 'facility', {
@@ -72,13 +78,18 @@ export default {
           location: this.location,
           workingHour: this.workingHours,
           logo: this.logo,
-          manager: this.manager
+          manager: this.manager || null
         }, {
           headers: headerModule.header}
         );
 
         if (response.status === 200) {
-          console.log('Car rental object created successfully.',response);
+          console.log('Car rental object created successfully.',response, this.emptyManagers);
+          if (this.emptyManagers) {
+            await this.$router.push('/register/'+response.data.facility.id);
+          } else {
+
+          }
         } else {
           console.log('Error creating car rental object.', response);
         }

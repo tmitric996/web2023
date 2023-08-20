@@ -11,9 +11,28 @@ import CarRentalObjectForm from "./components/CarRentalObjectForm";
 Vue.use(VueRouter);
 
 const routes = [
-    { path: '/register', component: RegistrationForm },
-    { path: '/login', component: LoginForm },
-    { path: '/facility', component: CarRentalObjectForm },
+    {
+        path: '/register/:objectmanager',
+        component: RegistrationForm,
+        props: true
+    },
+    {
+        path: '/login',
+        component: LoginForm
+    },
+    {
+        path: '/facility',
+        component: CarRentalObjectForm,
+        // beforeEnter: (to, from, next) => {
+        //     const userRole = localStorage.getItem('role');
+        //     if (userRole === 'ADMIN') {
+        //         next();
+        //     } else {
+        //         // Korisnik nema odgovarajuću ulogu, preusmeri ga na neku drugu rutu
+        //         next('/');
+        //     }
+        // }
+    },
 ];
 
 const router = new VueRouter({

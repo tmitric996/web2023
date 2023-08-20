@@ -98,6 +98,7 @@ import headerModule from '../auth/header.js';
 import baseMixin from "../common/baseMixin";
 
 export default {
+  props: ['objectmanager'],
   mixins: [baseMixin],
   data() {
     return {
@@ -140,13 +141,20 @@ export default {
           gender: this.gender,
           dateOfBirth: this.dateOfBirth,
           role: this.userRole === 'ADMIN'? 'MANAGER' : 'USER',
+          carRentalObject: this.objectmanager || null
         }, {
           headers: headers,
         });
 
         if (response.status === 200) {
           this.registrationStatus = 'success';
-          console.log('Korisnik je uspešno registrovan.');
+          if (this.objectmanager) {
+            const res = await axios.put(this.basePath + 'facility/' + this.objectmanager, {manager : response.data.user.id}, {
+              headers: headers,
+            });
+            console.log("res", res);
+          }
+          console.log('Korisnik je uspešno registrovan.', this.carRentalObject, this.objectmanager, this.props);
         } else {
           this.registrationStatus = 'error';
           console.log('Došlo je do greške prilikom registracije korisnika.');

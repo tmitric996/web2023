@@ -14,9 +14,10 @@ const carRentalObjectController = {
         if (res.statusCode === 401) {
             return;
         }
+        console.log('req.body', req.body);
         const { name, location, workingHour, logo, manager} = req.body;
 
-        if (!name || !location || !workingHour || !logo || !manager) {
+        if (!name || !location || !workingHour || !logo) {
             return res.status(400).json({ message: 'Molimo popunite sva polja.' });
         }
 
@@ -28,14 +29,30 @@ const carRentalObjectController = {
             location,
             logo,
             null,
-            manager
+            manager || null
 
         );
 
         carRentalObjectService.saveCarRentalObject(newCarRentalObject);
-        return res.status(200).json({message: 'Novi objekat je sacuvan.'});
+        return res.status(200).json({message: 'Novi objekat je sacuvan.', facility: newCarRentalObject});
 
 
+    },
+
+    editFacility(req, res) {
+        authService.verifyToken(req, res, 'ADMIN');
+        if (res.statusCode === 401) {
+            return;
+        }
+        const id = parseInt(req.params.id);
+        const facilityData = req.body;
+
+        const isUpdated = carRentalObjectService.updateFacility(facilityData, id);
+        if (isUpdated) {
+            return res.status(200).json({message: 'Objekat je uspešno ažurirano.'});
+        } else {
+            return res.status(404).json({error: 'Objekat sa datim ID-em nije pronađeno.'});
+        }
     },
 
     getFacility(req, res) {

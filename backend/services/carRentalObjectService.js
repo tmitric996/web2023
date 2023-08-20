@@ -26,6 +26,7 @@ class carRentalObjectService {
 
     saveCarRentalObject(carRentalObject) {
         const objects = getCarRentalObjects();
+        console.log('carRentalObject',carRentalObject);
         objects.push(carRentalObject);
         saveCarRentalObjects(objects);
     }
@@ -56,6 +57,26 @@ class carRentalObjectService {
 
         return carRentalObjects;
     };
+
+    updateFacility(objectData, id) {
+        try {
+            const objects = getCarRentalObjects();
+            const indexToUpdate = objects.findIndex((object) => object.id === id);
+            if (indexToUpdate === -1) {
+                return false;
+            }
+            console.log("objectData,", objectData);
+
+            const updatedObject = { ...objects[indexToUpdate], ...objectData}
+            objects[indexToUpdate] = updatedObject;
+            console.log("updatedObject,", updatedObject);
+            saveCarRentalObjects(objects);
+            return true;
+        } catch (error) {
+            console.error('Greška prilikom ažuriranja objekta:', error);
+            return false;
+        }
+    }
 
     getObjects() {
         const carRentalObjects = getCarRentalObjects();
