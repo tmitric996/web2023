@@ -59,6 +59,13 @@ const carRentalObjectController = {
         const facilities = carRentalObjectService.getCarRentalObjectsSortedByWorkingHour();
         return res.status(200).json({ facilities:facilities });
     },
+
+    getFacilityById(req, res) {
+        const id = parseInt(req.params.id);
+
+        const facility = carRentalObjectService.getCarRentalObjectsById(id);
+        return res.status(200).json({ facility:facility });
+    },
 };
 module.exports = carRentalObjectController;
 

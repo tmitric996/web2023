@@ -21,7 +21,18 @@ const getCarRentalObjects = () => {
         return [];
     }
 };
+const getCarRentalObjectById = (id) => {
+    try {
+        const objectsData = fs.readFileSync(carRentalObjectFilePath, 'utf8');
+        const objects = JSON.parse(objectsData);
+        const index = objects.findIndex((object) => object.id ===  parseInt(id));
 
+        const object = objects[index];
+        return object || null;
+    } catch (error) {
+        return null;
+    }
+};
 class carRentalObjectService {
 
     saveCarRentalObject(carRentalObject) {
@@ -30,7 +41,9 @@ class carRentalObjectService {
         objects.push(carRentalObject);
         saveCarRentalObjects(objects);
     }
-
+    getCarRentalObjectsById(id) {
+         return getCarRentalObjectById(id);
+    }
     getCarRentalObjectsSortedByWorkingHour() {
         const carRentalObjects = getCarRentalObjects();
 

@@ -205,8 +205,7 @@ export default {
       }
       if (this.registrationStatus === 'success'){
         if (this.userRole === 'ADMIN') {
-          //todo if admin register new mgr, redirect him to all facilities page
-          // this.$router.push('/facilities');
+          this.$router.push('/rent-a-car');
         } else {
           this.$router.push('/login');
         }

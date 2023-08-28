@@ -17,3 +17,21 @@
     border: none;
     margin-bottom: 20px;
 }
+
+.card .row .col-md-4{
+    width: 20%;
+
+}
+
+.me-2 button{
+    padding-top: 0px;
+    padding-bottom:  0px;
+}
+
+.card img {
+    height: 100%;
+    width: auto;
+    max-height: 100%;
+    object-fit: contain;
+    margin: 5px;
+}

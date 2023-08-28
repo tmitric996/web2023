@@ -8,6 +8,7 @@ import LoginForm from './components/LoginForm.vue';
 import App from './components/App.vue';
 import CarRentalObjectForm from "./components/CarRentalObjectForm";
 import CarRentalObjectList from "./components/CarRentalObjectList";
+import CarRentalObject from "./components/CarRentalObject";
 
 Vue.use(VueRouter);
 
@@ -26,6 +27,11 @@ const routes = [
         component: CarRentalObjectList
     },
     {
+        path: '/rent-a-car/:id',
+        component: CarRentalObject,
+        props: true
+    },
+    {
         path: '/facility',
         component: CarRentalObjectForm,
         // beforeEnter: (to, from, next) => {
@@ -38,6 +44,7 @@ const routes = [
         //     }
         // }
     },
+    { path: '*', redirect: '/rent-a-car' },
 ];
 
 const router = new VueRouter({

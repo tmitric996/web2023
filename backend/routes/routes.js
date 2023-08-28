@@ -16,6 +16,7 @@ router.get('/profile/:id', authController.getUserProfile);
 router.post('/facility', carRentalObjectController.addFacility);
 router.put('/facility/:id', carRentalObjectController.editFacility);
 router.get('/facility', carRentalObjectController.getFacility);
+router.get('/facility/:id', carRentalObjectController.getFacilityById);
 
 router.post('/vehicle', vehicleController.addVehicle);
 router.put('/vehicle/:id', vehicleController.updateVehicle);

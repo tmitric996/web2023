@@ -73,7 +73,7 @@ export default {
           localStorage.setItem('username', this.username);
           localStorage.setItem('role', response.data.role);
 
-          // await this.$router.push('/');
+          await this.$router.push('/rent-a-car');
 
         } else {
           console.log('Došlo je do greške prilikom prijave korisnika.');

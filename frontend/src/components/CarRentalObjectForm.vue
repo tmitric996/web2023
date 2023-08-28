@@ -61,7 +61,8 @@ export default {
     onLogoChange(event) {
       if (event.target.files && event.target.files[0]) {
         console.log(event.target.files, event.target.files[0]);
-        this.logoFile = event.target.files[0];
+        this.logoFile = '/web2023/frontend/public/assets/images/' + event.target.files[0].name;
+        console.log('logoFile', '/web2023/frontend/public/assets/images/' + this.logoFile.name);
       }
     },
     async fetchManagers() {
@@ -95,7 +96,7 @@ export default {
           if (this.emptyManagers) {
             await this.$router.push('/register/'+response.data.facility.id);
           } else {
-
+            await this.$router.push('/rent-a-car');
           }
         } else {
           console.log('Error creating car rental object.', response);
