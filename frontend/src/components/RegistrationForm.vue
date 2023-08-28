@@ -1,7 +1,9 @@
 <template>
-  <div class="container mt-5">
+  <div class="container mt-5" style="max-width: 400px;">
     <div class="card p-4 shadow-lg">
-      <h2 class="mb-4 text-center">Registration Form</h2>
+      <h2 v-if="!carRentalObject && userRole !== 'ADMIN'" class="mb-4 text-center">Registration Form</h2>
+      <h2 v-if="!carRentalObject && userRole === 'ADMIN'" class="mb-4 text-center">Register manager</h2>
+      <h2 v-if="carRentalObject" class="mb-4 text-center">Register manager for new object:</h2>
       <form @submit.prevent="registerUser">
         <div class="mb-3">
           <label for="username" class="form-label">Username</label>
@@ -113,6 +115,7 @@ export default {
       dateOfBirth: '',
       registrationStatus: null,
       isModalShown: false,
+      carRentalObject: this.objectmanager || false,
       errorMessage: "Oops! Something went wrong during registration.",
       userRole: localStorage.getItem('role')? localStorage.getItem('role') : null,
     };
@@ -141,7 +144,7 @@ export default {
           gender: this.gender,
           dateOfBirth: this.dateOfBirth,
           role: this.userRole === 'ADMIN'? 'MANAGER' : 'USER',
-          carRentalObject: this.objectmanager || null
+          carRentalObject: this.carRentalObject
         }, {
           headers: headers,
         });
@@ -154,7 +157,6 @@ export default {
             });
             console.log("res", res);
           }
-          console.log('Korisnik je uspešno registrovan.', this.carRentalObject, this.objectmanager, this.props);
         } else {
           this.registrationStatus = 'error';
           console.log('Došlo je do greške prilikom registracije korisnika.');
@@ -202,7 +204,12 @@ export default {
         backdrop.parentNode.removeChild(backdrop);
       }
       if (this.registrationStatus === 'success'){
-        this.$router.push('/');
+        if (this.userRole === 'ADMIN') {
+          //todo if admin register new mgr, redirect him to all facilities page
+          // this.$router.push('/facilities');
+        } else {
+          this.$router.push('/login');
+        }
       } else {
         location.reload();
       }

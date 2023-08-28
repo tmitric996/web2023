@@ -1,5 +1,5 @@
 <template>
-  <div class="container mt-5">
+  <div class="container mt-5" style="max-width: 400px;">
     <div class="card p-4 shadow-lg">
       <h2 class="mb-4 text-center">Create Car Rental Object</h2>
       <form @submit.prevent="createCarRentalObject">
@@ -17,7 +17,7 @@
         </div>
         <div class="mb-3">
           <label for="logo" class="form-label">Logo</label>
-          <input type="text" class="form-control" v-model="logo" id="logo" accept="image/*" required>
+          <input type="file" accept=".jpg, .png, .jpeg" @change="onLogoChange" required>
         </div>
         <div class="mb-3">
           <label for="manager" class="form-label">Manager</label>
@@ -49,6 +49,7 @@ export default {
       workingHours: '',
       logo: null,
       manager: null,
+      logoFile: null,
       managers: [], // Fetch this from the API
       userRole: localStorage.getItem('role')? localStorage.getItem('role') : null,
     };
@@ -57,10 +58,16 @@ export default {
     await this.fetchManagers();
   },
   methods: {
+    onLogoChange(event) {
+      if (event.target.files && event.target.files[0]) {
+        console.log(event.target.files, event.target.files[0]);
+        this.logoFile = event.target.files[0];
+      }
+    },
     async fetchManagers() {
       try {
         const response = await axios.get(this.basePath + 'managers/free', {
-          headers: headerModule.header}); // Fetch managers from the API
+          headers: headerModule.header});
         this.managers = response.data.managers;
         console.log("this.managers.isEmpty", this.managers.length, this.managers )
         if (this.managers.length===0) {
@@ -77,7 +84,7 @@ export default {
           name: this.name,
           location: this.location,
           workingHour: this.workingHours,
-          logo: this.logo,
+          logo: this.logoFile,
           manager: this.manager || null
         }, {
           headers: headerModule.header}

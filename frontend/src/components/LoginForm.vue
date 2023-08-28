@@ -1,5 +1,5 @@
 <template>
-  <div class="container mt-5">
+  <div class="container mt-5" style="max-width: 400px;">
     <div class="card p-4 shadow-lg">
       <h2 class="mb-4 text-center">Login Form</h2>
       <form @submit.prevent="loginUser">

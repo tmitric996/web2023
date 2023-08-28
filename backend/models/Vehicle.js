@@ -3,7 +3,7 @@ class Vehicle {
     static idCounter = 1;
 
     constructor(brand, model, price, type, rentalObject, transmission, fuelType, consumption, numberOfDoors, numberOfPersons, image, status, description) {
-        this.id = Vehicle.idCounter++;
+        this.id = Date.now() + Vehicle.idCounter++;
         this.brand = brand;
         this.model = model;
         this.price = price;

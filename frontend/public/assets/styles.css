@@ -1,7 +1,7 @@
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 
 .container {
-    max-width: 400px;
+    /*max-width: 400px;*/
 }
 
 .card {
@@ -11,4 +11,9 @@
 
 .is-invalid {
     border: 1px solid red !important;
+}
+
+.card {
+    border: none;
+    margin-bottom: 20px;
 }
