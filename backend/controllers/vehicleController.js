@@ -13,7 +13,9 @@ const vehicleController = {
             return;
         }
         const { brand, model, price, type, rentalObject, transmission, fuelType, consumption, numberOfDoors, numberOfPersons, image, status, description } = req.body;
-        if (!brand || !model || !price || !type || !rentalObject || !transmission || !fuelType || !consumption || !numberOfPersons || !image || !status || !numberOfDoors) {
+        if (!brand || !model || !price || !type || !rentalObject || !transmission || !fuelType || !consumption || !numberOfPersons || !image  || !numberOfDoors) {
+           console.log(   !brand, !model, !price, !type, !rentalObject, !transmission, !fuelType, !consumption, !numberOfPersons, !image, !status, !numberOfDoors);
+
             return res.status(400).json({ message: 'Molimo popunite sva polja.' });
         }
 
@@ -29,7 +31,7 @@ const vehicleController = {
             numberOfDoors,
             numberOfPersons,
             image,
-            status,
+            status? status:'available',
             description? description:null
         );
 

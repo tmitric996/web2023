@@ -34,7 +34,7 @@
     <div class="card mb-3" v-for="object in sortedObjects" :key="object.id" style="background-color: #f8f9fa;">
       <div class="row g-0" @click="redirectToFacility(object.id)">
         <div class="col-md-4">
-          <img :src="'/assets/images/' + object.logo" class="img-fluid" alt="Car Rental Logo">
+          <img :src="object.logo? '/assets/images/' + object.logo : nullets/images/furniture.png" class="img-fluid" alt="Car Rental Logo">
         </div>
         <div class="col-md-8">
           <div class="card-body">
@@ -87,7 +87,7 @@ export default {
         const nameMatch = object.name.toLowerCase().includes(this.searchQuery.toLowerCase());
         const locationMatch = object.location.toLowerCase().includes(this.searchQuery.toLowerCase());
         // const vehicleTypeMatch = this.selectedVehicleType === '' || object.vehicleType === this.selectedVehicleType;
-        const ratingMatch = object.rating.toString().includes(this.searchQuery.toLowerCase());
+        const ratingMatch = object.rating? object.rating.toString().includes(this.searchQuery.toLowerCase()):false;
         return nameMatch || locationMatch || ratingMatch;
       });
     },

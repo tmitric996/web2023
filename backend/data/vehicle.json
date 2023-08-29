@@ -49,5 +49,22 @@
     "status": "description",
     "description": "description",
     "active": true
+  },
+  {
+    "id": 1693345017164,
+    "brand": "1",
+    "model": "1",
+    "price": "1",
+    "type": "1",
+    "rentalObject": "8",
+    "transmission": "this.transmission",
+    "fuelType": "1",
+    "consumption": "1",
+    "numberOfDoors": "1",
+    "numberOfPersons": "1",
+    "image": "car.png",
+    "status": "available",
+    "description": "s",
+    "active": true
   }
 ]

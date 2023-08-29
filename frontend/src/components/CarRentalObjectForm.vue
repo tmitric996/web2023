@@ -1,5 +1,5 @@
 <template>
-  <div class="container mt-5" style="max-width: 400px;">
+  <div class="container mt-5" style="max-width: 700px;">
     <div class="card p-4 shadow-lg">
       <h2 class="mb-4 text-center">Create Car Rental Object</h2>
       <form @submit.prevent="createCarRentalObject">
@@ -12,8 +12,32 @@
           <input type="text" class="form-control" v-model="location" id="location" required>
         </div>
         <div class="mb-3">
-          <label for="workingHours" class="form-label">Working Hours</label>
-          <input type="text" class="form-control" v-model="workingHours" id="workingHours" required>
+          <table class="table">
+            <thead>
+            <tr>
+              <th></th>
+              <th v-for="(day, index) in daysOfWeek" :key="index">{{ day }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>Od</td>
+              <td v-for="day in daysOfWeek" :key="day">
+                <select class="form-select small-font" v-model="workingHours[day].from" required>
+                  <option v-for="time in timeOptions" :key="time" :value="time">{{ time }}</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>Do</td>
+              <td v-for="day in daysOfWeek" :key="day">
+                <select class="form-select small-font" v-model="workingHours[day].to" required>
+                  <option v-for="time in timeOptions" :key="time" :value="time">{{ time }}</option>
+                </select>
+              </td>
+            </tr>
+            </tbody>
+          </table>
         </div>
         <div class="mb-3">
           <label for="logo" class="form-label">Logo</label>
@@ -43,26 +67,42 @@ export default {
   mixins: [baseMixin],
   data() {
     return {
+      daysOfWeek: ['Pon-Pet', 'Sub', 'Ned'],
+      workingHours: {
+        'Pon-Pet': { from: '', to: '' },
+        'Sub': { from: '', to: '' },
+        'Ned': { from: '', to: '' },
+      },
+      timeOptions: [],
       emptyManagers: false,
       name: '',
       location: '',
-      workingHours: '',
       logo: null,
       manager: null,
       logoFile: null,
-      managers: [], // Fetch this from the API
+      managers: [],
       userRole: localStorage.getItem('role')? localStorage.getItem('role') : null,
     };
   },
   async created() {
     await this.fetchManagers();
+    this.timeOptions = this.generateTimeOptions();
   },
   methods: {
+    generateTimeOptions() {
+      const options = [];
+      for (let hour = 0; hour <= 23; hour++) {
+        for (let minute = 0; minute <= 30; minute += 30) {
+          const time = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+          options.push(time);
+        }
+      }
+      return options;
+    },
     onLogoChange(event) {
       if (event.target.files && event.target.files[0]) {
         console.log(event.target.files, event.target.files[0]);
-        this.logoFile = '/web2023/frontend/public/assets/images/' + event.target.files[0].name;
-        console.log('logoFile', '/web2023/frontend/public/assets/images/' + this.logoFile.name);
+        this.logoFile = event.target.files[0].name;
       }
     },
     async fetchManagers() {

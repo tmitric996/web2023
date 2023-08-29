@@ -9,6 +9,7 @@ import App from './components/App.vue';
 import CarRentalObjectForm from "./components/CarRentalObjectForm";
 import CarRentalObjectList from "./components/CarRentalObjectList";
 import CarRentalObject from "./components/CarRentalObject";
+import VehicleForm from "./components/VehicleForm";
 
 Vue.use(VueRouter);
 
@@ -29,6 +30,11 @@ const routes = [
     {
         path: '/rent-a-car/:id',
         component: CarRentalObject,
+        props: true
+    },
+    {
+        path: '/vehicle/:objectid',
+        component: VehicleForm,
         props: true
     },
     {

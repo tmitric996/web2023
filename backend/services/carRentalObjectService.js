@@ -47,27 +47,28 @@ class carRentalObjectService {
     getCarRentalObjectsSortedByWorkingHour() {
         const carRentalObjects = getCarRentalObjects();
 
-        const currentTime = new Date();
-        const currentHour = currentTime.getHours();
-        const currentMinutes = currentTime.getMinutes();
+        // const currentTime = new Date();
+        // const currentHour = currentTime.getHours();
+        // const currentMinutes = currentTime.getMinutes();
+        //
+        // const compareWorkingHour = (obj1, obj2) => {
+        //     const [hour1, minute1] = obj1.workingHour.split(':').map(Number);
+        //     const [hour2, minute2] = obj2.workingHour.split(':').map(Number);
+        //
+        //     const isOpen1 = hour1 < currentHour || (hour1 === currentHour && minute1 <= currentMinutes);
+        //     const isOpen2 = hour2 < currentHour || (hour2 === currentHour && minute2 <= currentMinutes);
+        //
+        //     if (isOpen1 && !isOpen2) return -1;
+        //     if (!isOpen1 && isOpen2) return 1;
+        //
+        //     if (hour1 < hour2 || (hour1 === hour2 && minute1 < minute2)) return -1;
+        //     if (hour1 > hour2 || (hour1 === hour2 && minute1 > minute2)) return 1;
+        //     return 0;
+        // };
 
-        const compareWorkingHour = (obj1, obj2) => {
-            const [hour1, minute1] = obj1.workingHour.split(':').map(Number);
-            const [hour2, minute2] = obj2.workingHour.split(':').map(Number);
-
-            const isOpen1 = hour1 < currentHour || (hour1 === currentHour && minute1 <= currentMinutes);
-            const isOpen2 = hour2 < currentHour || (hour2 === currentHour && minute2 <= currentMinutes);
-
-            if (isOpen1 && !isOpen2) return -1;
-            if (!isOpen1 && isOpen2) return 1;
-
-            if (hour1 < hour2 || (hour1 === hour2 && minute1 < minute2)) return -1;
-            if (hour1 > hour2 || (hour1 === hour2 && minute1 > minute2)) return 1;
-            return 0;
-        };
-
-        carRentalObjects.sort(compareWorkingHour);
-
+        // carRentalObjects.sort(compareWorkingHour);
+//todo napraviiti novu sort koji radi sa novim unosom working houra
+//todo takodje napraviti da je unos praza za dane to znaci da ne radi
         return carRentalObjects;
     };
 

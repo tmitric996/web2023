@@ -4,7 +4,7 @@
       <h2 class="mb-4 text-center">{{ selectedObject.name }}</h2>
       <div class="d-flex mb-3">
         <div class="col-md-4">
-          <img :src="'/assets/images/' + selectedObject.logo" class="img-fluid" alt="Car Rental Logo">
+          <img :src="selectedObject.logo ? '/assets/images/' + selectedObject.logo : null" class="img-fluid" alt="Car Rental Logo">
         </div>
         <div class="col-md-8">
           <div class="card-body">
@@ -13,6 +13,9 @@
             <p><strong>Status:</strong> {{ selectedObject.status ? 'Radi' : 'Ne radi' }}</p>
             <p><strong>Lokacija:</strong> {{ selectedObject.location }}</p>
             <p><strong>Ocena:</strong> {{ selectedObject.rating }}</p>
+          </div>
+          <div v-if="userRole === 'MANAGER'" class="col-md-12 text-end mt-3">
+            <button @click="redirectToVehicles" class="btn btn-primary">Dodaj vozilo</button>
           </div>
         </div>
       </div>
@@ -32,13 +35,16 @@ export default {
     return {
       carRentalObjects: [],
       selectedObject: {},
-    };
+      userRole: localStorage.getItem('role')? localStorage.getItem('role') : null,
+
+  };
   },
   async created() {
     await this.fetchCarRentalObjects();
   },
   methods: {
     async fetchCarRentalObjects() {
+      console.log(this.userRole)
       try {
         const response = await axios.get(this.basePath + 'facility/'+this.id);
         this.selectedObject = response.data.facility;
@@ -46,6 +52,9 @@ export default {
       } catch (error) {
         console.error('Error fetching car rental objects:', error);
       }
+    },
+    redirectToVehicles() {
+      this.$router.push('/vehicle/'+this.id);
     },
   },
 };
