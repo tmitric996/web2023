@@ -35,6 +35,26 @@ const getCarRentalObjectById = (id) => {
 };
 class carRentalObjectService {
 
+    addVehicle(vehicleId, objectId){
+        try {
+            const objects = getCarRentalObjects();
+            const indexToUpdate = objects.findIndex((object) => object.id === parseInt(objectId));
+            if (indexToUpdate === -1) {
+                return false;
+            }
+            if (!objects[indexToUpdate].vehicles) {
+                objects[indexToUpdate].vehicles = [];
+            }
+
+            objects[indexToUpdate].vehicles.push(vehicleId);
+            saveCarRentalObjects(objects);
+            return true;
+        } catch (error) {
+            console.error('Greška prilikom ažuriranja objekta:', error);
+            return false;
+        }
+    }
+
     saveCarRentalObject(carRentalObject) {
         const objects = getCarRentalObjects();
         console.log('carRentalObject',carRentalObject);

@@ -11,7 +11,9 @@ router.post('/login', authController.login);
 router.get('/protected', authController.protected);
 router.get('/managers', authController.getManagers);
 router.get('/managers/free', authController.getManagers);
-router.get('/profile/:id', authController.getUserProfile);
+router.get('/profile/:username', authController.getUserProfile);
+router.put('/profile/:id', authController.editProfile);
+
 
 router.post('/facility', carRentalObjectController.addFacility);
 router.put('/facility/:id', carRentalObjectController.editFacility);

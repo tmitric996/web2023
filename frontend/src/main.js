@@ -10,6 +10,8 @@ import CarRentalObjectForm from "./components/CarRentalObjectForm";
 import CarRentalObjectList from "./components/CarRentalObjectList";
 import CarRentalObject from "./components/CarRentalObject";
 import VehicleForm from "./components/VehicleForm";
+import Profile from "./components/Profile";
+import EditProfile from "./components/EditProfile";
 
 Vue.use(VueRouter);
 
@@ -35,20 +37,52 @@ const routes = [
     {
         path: '/vehicle/:objectid',
         component: VehicleForm,
-        props: true
+        props: true,
+        beforeEnter: (to, from, next) => {
+            const userRole = localStorage.getItem('role');
+            if (userRole === 'MANAGER') {
+                next();
+            } else {
+                next('/');
+            }
+        }
+    },
+    {
+        path: '/profile',
+        component: Profile,
+        beforeEnter: (to, from, next) => {
+            const userRole = localStorage.getItem('role');
+            if (userRole) {
+                next();
+            } else {
+                next('/');
+            }
+        }
+    },
+    {
+        path: '/edit-profile/:userId',
+        component: EditProfile,
+        props: true,
+        beforeEnter: (to, from, next) => {
+            const userRole = localStorage.getItem('role');
+            if (userRole) {
+                next();
+            } else {
+                next('/');
+            }
+        }
     },
     {
         path: '/facility',
         component: CarRentalObjectForm,
-        // beforeEnter: (to, from, next) => {
-        //     const userRole = localStorage.getItem('role');
-        //     if (userRole === 'ADMIN') {
-        //         next();
-        //     } else {
-        //         // Korisnik nema odgovarajuću ulogu, preusmeri ga na neku drugu rutu
-        //         next('/');
-        //     }
-        // }
+        beforeEnter: (to, from, next) => {
+            const userRole = localStorage.getItem('role');
+            if (userRole === 'ADMIN') {
+                next();
+            } else {
+                next('/');
+            }
+        }
     },
     { path: '*', redirect: '/rent-a-car' },
 ];

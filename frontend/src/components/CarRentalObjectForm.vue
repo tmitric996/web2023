@@ -1,5 +1,6 @@
 <template>
   <div class="container mt-5" style="max-width: 700px;">
+    <NavigationHeader />
     <div class="card p-4 shadow-lg">
       <h2 class="mb-4 text-center">Create Car Rental Object</h2>
       <form @submit.prevent="createCarRentalObject">
@@ -62,9 +63,13 @@ import '../../public/assets/styles.css';
 import axios from 'axios';
 import headerModule from '../auth/header.js';
 import baseMixin from "../common/baseMixin";
+import NavigationHeader from "./NavigationHeader";
 
 export default {
   mixins: [baseMixin],
+  components: {
+    NavigationHeader
+  },
   data() {
     return {
       daysOfWeek: ['Pon-Pet', 'Sub', 'Ned'],

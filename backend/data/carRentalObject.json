@@ -74,7 +74,9 @@
   {
     "id": 8,
     "name": "adsadsasdd",
-    "vehicles": null,
+    "vehicles": [
+      1693428137076
+    ],
     "workingHour": "d",
     "status": null,
     "location": "asd",

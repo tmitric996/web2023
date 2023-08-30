@@ -1,5 +1,6 @@
 <template>
   <div class="container mt-5">
+    <NavigationHeader />
     <h2 class="mb-4 text-center">Objekti za iznajmljivanje vozila</h2>
 
     <div class="d-flex justify-content-between mb-4">
@@ -51,10 +52,13 @@
 <script>
 import axios from 'axios';
 import baseMixin from "../common/baseMixin";
+import NavigationHeader from "./NavigationHeader";
 
 export default {
   mixins: [baseMixin],
-
+  components: {
+    NavigationHeader
+  },
   data() {
     return {
       carRentalObjects: [], // Fetch this from the API

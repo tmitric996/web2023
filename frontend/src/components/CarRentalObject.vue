@@ -1,5 +1,6 @@
 <template>
   <div class="container mt-5">
+    <NavigationHeader />
     <div class="card p-4 shadow-lg">
       <h2 class="mb-4 text-center">{{ selectedObject.name }}</h2>
       <div class="d-flex mb-3">
@@ -26,11 +27,14 @@
 <script>
 import axios from 'axios';
 import baseMixin from "../common/baseMixin";
+import NavigationHeader from "./NavigationHeader";
 
 export default {
   mixins: [baseMixin],
   props: ['id'],
-
+  components: {
+    NavigationHeader
+  },
   data() {
     return {
       carRentalObjects: [],

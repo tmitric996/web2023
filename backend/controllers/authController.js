@@ -78,9 +78,21 @@ const authController = {
         if (res.statusCode === 401) {
             return;
         }
-        const userProfile = authService.getUserBy('id', parseInt(req.params.id));
+        const userProfile = authService.getUserBy('username', req.params.username);
         return res.status(200).json({ user :userProfile });
 
+    },
+
+    editProfile(req, res) {
+        const id = parseInt(req.params.id);
+        const data = req.body;
+
+        const isUpdated = authService.updateProfile(data, id);
+        if (isUpdated) {
+            return res.status(200).json({message: 'Profil je uspešno ažurirano.'});
+        } else {
+            return res.status(404).json({error: 'Profil sa datim ID-em nije pronađeno.'});
+        }
     },
 
     getManagers(req, res) {

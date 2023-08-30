@@ -1,5 +1,6 @@
 <template>
   <div class="container mt-5" style="max-width: 400px;">
+    <NavigationHeader />
     <div class="card p-4 shadow-lg">
       <h2 v-if="!carRentalObject && userRole !== 'ADMIN'" class="mb-4 text-center">Registration Form</h2>
       <h2 v-if="!carRentalObject && userRole === 'ADMIN'" class="mb-4 text-center">Register manager</h2>
@@ -98,10 +99,14 @@ import '../../public/assets/styles.css';
 import axios from 'axios';
 import headerModule from '../auth/header.js';
 import baseMixin from "../common/baseMixin";
+import NavigationHeader from "./NavigationHeader";
 
 export default {
   props: ['objectmanager'],
   mixins: [baseMixin],
+  components: {
+    NavigationHeader
+  },
   data() {
     return {
       showPassword : true,

@@ -1,5 +1,6 @@
 <template>
   <div class="container mt-5" style="max-width: 500px;">
+    <NavigationHeader />
     <div class="card p-4 shadow-lg">
       <h2 class="mb-4 text-center">Unos Podataka o Vozilu</h2>
       <form @submit.prevent="createVehicle">
@@ -59,11 +60,14 @@
 import axios from 'axios';
 import headerModule from '../auth/header.js';
 import baseMixin from "../common/baseMixin";
+import NavigationHeader from "./NavigationHeader";
 
 export default {
   mixins: [baseMixin],
   props: ['objectid'],
-
+  components: {
+    NavigationHeader
+  },
   data() {
     return {
       brand: '',
@@ -111,6 +115,8 @@ export default {
         );
         if (response.status === 200) {
           console.log('Car rental object created successfully.', response, this.emptyManagers);
+          this.$router.push('/rent-a-car/'+this.objectid);
+
           if (this.emptyManagers) {
           } else {
           }

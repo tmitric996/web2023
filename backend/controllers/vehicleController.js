@@ -1,15 +1,18 @@
 const VehicleService = require("../services/vehicleService");
 const AuthService = require("../services/authService");
 const Vehicle = require('../models/Vehicle');
+const CarRentalObjectService = require("../services/carRentalObjectService");
 
 const authService = new AuthService();
 const vehicleService = new VehicleService();
+const carRentalObjectService = new CarRentalObjectService();
 
 const vehicleController = {
 
     addVehicle(req, res) {
         authService.verifyToken(req, res, 'MANAGER');
         if (res.statusCode === 401) {
+            console.log(req);
             return;
         }
         const { brand, model, price, type, rentalObject, transmission, fuelType, consumption, numberOfDoors, numberOfPersons, image, status, description } = req.body;
@@ -36,6 +39,8 @@ const vehicleController = {
         );
 
         vehicleService.saveVehicles(newVehicle);
+        //todo update carrentalobj append this
+        carRentalObjectService.addVehicle(newVehicle.id, newVehicle.rentalObject);
         return res.status(200).json({message: 'Novo vozilo je sacuvan.'});
 
     },

@@ -46,7 +46,7 @@ const getUserBy= (param, id) => {
         const userData = fs.readFileSync(usersFilePath, 'utf8');
         const users = JSON.parse(userData);
         const user = users.filter(user => user[param] === id);
-
+console.log("user", user)
         return user || null;
     } catch (error) {
         return null;
@@ -62,6 +62,25 @@ class AuthService {
     getUserByUsername(username) {
         const users = getUsers();
         return users.find((user) => user.username === username);
+    }
+
+    updateProfile(data, id) {
+        try {
+            const users = getUsers();
+            const indexToUpdate = users.findIndex((user) => user.id === id);
+            if (indexToUpdate === -1) {
+                return false;
+            }
+
+            const updatedUser = { ...users[indexToUpdate], ...data}
+            users[indexToUpdate] = updatedUser;
+            console.log("updatedObject,", updatedUser);
+            saveUsers(users);
+            return true;
+        } catch (error) {
+            console.error('Greška prilikom ažuriranja profila:', error);
+            return false;
+        }
     }
 
     getAllManagers(free) {

@@ -66,5 +66,39 @@
     "status": "available",
     "description": "s",
     "active": true
+  },
+  {
+    "id": 1693345017163,
+    "brand": "w",
+    "model": "w",
+    "price": "w",
+    "type": "w",
+    "rentalObject": "8",
+    "transmission": "this.transmission",
+    "fuelType": "1",
+    "consumption": "1",
+    "numberOfDoors": "1",
+    "numberOfPersons": "1",
+    "image": "toys.png",
+    "status": "available",
+    "description": "s",
+    "active": true
+  },
+  {
+    "id": 1693428137076,
+    "brand": "2",
+    "model": "2",
+    "price": "2",
+    "type": "2",
+    "rentalObject": "8",
+    "transmission": "this.transmission",
+    "fuelType": "2",
+    "consumption": "2",
+    "numberOfDoors": "2",
+    "numberOfPersons": "2",
+    "image": "food-drinks.png",
+    "status": "available",
+    "description": "2",
+    "active": true
   }
 ]
