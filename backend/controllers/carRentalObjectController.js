@@ -14,7 +14,6 @@ const carRentalObjectController = {
         if (res.statusCode === 401) {
             return;
         }
-        console.log('req.body', req.body);
         const { name, location, workingHour, logo, manager} = req.body;
 
         if (!name || !location || !workingHour || !logo) {

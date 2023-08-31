@@ -39,7 +39,6 @@ const vehicleController = {
         );
 
         vehicleService.saveVehicles(newVehicle);
-        //todo update carrentalobj append this
         carRentalObjectService.addVehicle(newVehicle.id, newVehicle.rentalObject);
         return res.status(200).json({message: 'Novo vozilo je sacuvan.'});
 

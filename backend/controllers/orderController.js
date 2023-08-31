@@ -1,10 +1,12 @@
 const Orderervice = require("../services/orderService");
 const AuthService = require("../services/authService");
+const ObjectService = require("../services/carRentalObjectService");
 const Order = require('../models/Order');
 const Vehicle = require("../models/Vehicle");
 
 const authService = new AuthService();
 const orderService = new Orderervice();
+const objectService = new ObjectService();
 
 const orderController = {
 
@@ -55,7 +57,20 @@ const orderController = {
         return res.status(200).json({ orders:orders });
     },
 
+    getVehiclesForDates(req, res) {
+        authService.verifyToken(req, res, 'USER')
+        if (res.statusCode === 401) {
+            return;
+        }
+        const id = req.body.objectId;
+        const startDate = parseInt(req.body.start_date);
+        const endDate = parseInt(req.body.end_date);
+console.log('objectId',id)
+        const vehicles = orderService.getAvailableVehiclesForPeriod(id, startDate, endDate);
+        return res.status(200).json({ vehicles:vehicles });
 
+
+    },
 
 };
 module.exports = orderController;

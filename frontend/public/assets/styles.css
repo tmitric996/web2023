@@ -19,9 +19,10 @@
 }
 
 .card .row .col-md-4{
-    width: 20%;
+    width: 220px;
 
 }
+
 
 .me-2 button{
     padding-top: 0px;
@@ -90,4 +91,14 @@
     color: white;
     cursor: pointer;
     margin-left: 10px;
+}
+
+.icons {
+    display: flex;
+    gap: 10px; /* Razmak između ikonica */
+    align-items: center; /* Centriraj ikonice vertikalno */
+}
+
+.icon {
+    font-size: 24px; /* Povećaj veličinu ikonica */
 }

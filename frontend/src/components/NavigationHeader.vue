@@ -7,9 +7,14 @@
         </button>
       </div>
       <div class="user-menu">
-        <router-link v-if="isLoggedIn" :to="'/profile'">
-          <i class="bi bi-person-square"></i>
-        </router-link>
+        <div class="icons">
+          <router-link v-if="isUser" :to="'/mycart'" class="icon">
+            <i class="bi bi-cart4 icon"></i>
+          </router-link>
+          <router-link v-if="isLoggedIn" :to="'/profile'" class="icon">
+            <i class="bi bi-person-square icon"></i>
+          </router-link>
+        </div>
         <button v-if="isLoggedIn" @click="logout">Logout</button>
         <button v-else @click="login">Login</button>
       </div>
@@ -22,6 +27,13 @@ export default {
   computed: {
     isLoggedIn() {
       return localStorage.getItem('username') !== null;
+    },
+    isUser() {
+      console.log(localStorage.getItem('role'))
+      if (localStorage.getItem('role')){
+        return (localStorage.getItem('role')==='USER');
+      } else
+      return false;
     }
   },
   methods: {

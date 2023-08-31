@@ -31,7 +31,6 @@ const getVehicle = (id) => {
     }
 };
 
-
 class vehicleService {
 
     saveVehicles(vehicel) {
@@ -55,6 +54,13 @@ class vehicleService {
             console.error('Greška prilikom ažuriranja vozila:', error);
             return false;
         }
+    }
+
+    getAvailableForBoject(id) {
+        const vehicles = getVehicles();
+        console.log("vehicles", vehicles, id);
+        return vehicles.filter((vehicle) => vehicle.status === 'available' && parseInt(vehicle.rentalObject) === parseInt(id));
+
     }
 
     deleteVehicle(id) {

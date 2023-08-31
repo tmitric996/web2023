@@ -3,8 +3,10 @@ const fs = require('fs');
 const path = require('path');
 
 const Order = require('../models/Order');
+const VehicleService = require("./vehicleService");
 
 const orderFilePath = path.join(__dirname, '../data/order.json');
+const vehicleService = new VehicleService();
 
 const saveOrder = (orders) => {
     fs.writeFileSync(orderFilePath, JSON.stringify(orders, null, 2), 'utf8');
@@ -57,6 +59,12 @@ class orderService {
         } catch (error) {
             return null;
         }
+    }
+
+    getAvailableVehiclesForPeriod(id, startDate, endDate) {
+        const vehicles = vehicleService.getAvailableForBoject(id);
+
+        return vehicles;
     }
 
     getOrdersForManager(id) {

@@ -46,7 +46,7 @@ class carRentalObjectService {
                 objects[indexToUpdate].vehicles = [];
             }
 
-            objects[indexToUpdate].vehicles.push(vehicleId);
+            objects[indexToUpdate].vehicles.push(parseInt(vehicleId));
             saveCarRentalObjects(objects);
             return true;
         } catch (error) {
@@ -115,6 +115,11 @@ class carRentalObjectService {
     getObjects() {
         const carRentalObjects = getCarRentalObjects();
         return carRentalObjects;
+    }
+
+    getVehicles(id) {
+        const object = getCarRentalObjectById(id);
+        return object.vehicles;
     }
 
 }

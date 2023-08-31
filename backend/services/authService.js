@@ -100,6 +100,8 @@ class AuthService {
 
     verifyToken(req, res, permission) {
         const token = req.headers.authorization;
+        console.log('objectIdreq',req)
+
         if (!token) {
             return res.status(401).json({ error: 'Nedostaje JWT token' });
         }
