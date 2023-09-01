@@ -17,16 +17,17 @@ const orderController = {
         }
         const { vehicles, carRentalObject, dateAndTime, duration, price, customer, status } = req.body;
         if (!vehicles || !carRentalObject || !dateAndTime || !duration || !price || !customer || !status ) {
+            console.log("ppppp",vehicles,carRentalObject, dateAndTime, duration, price, customer, status,req)
             return res.status(400).json({ message: 'Molimo popunite sva polja.' });
         }
-
+        const user = authService.getUserByUsername(customer);
         const newOrder = new Order(
             vehicles,
             carRentalObject,
             dateAndTime,
             duration,
             price,
-            customer,
+            user.id,
             status
         );
 

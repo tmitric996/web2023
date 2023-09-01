@@ -33,6 +33,7 @@
 import axios from "axios";
 import baseMixin from "../common/baseMixin";
 import NavigationHeader from "./NavigationHeader";
+import headerModule from "../auth/header";
 
 export default {
   mixins: [baseMixin],
@@ -42,12 +43,12 @@ export default {
   data() {
     return {
       cart: [], // Niz za čuvanje stavki u korpi
+      total:1
     };
   },
   computed: {
     total() {
-      // Računanje ukupne cene na osnovu stavki u korpi
-      // return this.cart.reduce((total, item) => total + item.price * item.quantity, 0);
+
     },
   },
   methods: {
@@ -61,10 +62,27 @@ export default {
         this.cart[index].quantity--;
       }
     },
-    rentVehicles() {
+    async rentVehicles() {
+
       // Implementirajte logiku za iznajmljivanje vozila
       // Ovde možete poslati podatke na server ili uraditi bilo šta što je potrebno za iznajmljivanje
       // Nakon iznajmljivanja, možete isprazniti korpu i preusmeriti korisnika na odgovarajuću stranicu
+      const response = await axios.post(this.basePath + 'order', {
+        vehicles: this.cart.map(item => item.id),
+        customer: localStorage.getItem('username'),
+        carRentalObject: this.cart[0].rentalObject,
+        dateAndTime: 'date and time',
+        duration: 9,
+        price: this.total,
+        status: 'pending',
+          }, {
+        headers: {
+          authorization: localStorage.getItem('token')
+        }
+          }
+      ); console.log("resss", response)
+      localStorage.removeItem('vehicle');
+
       this.cart = [];
       // this.$router.push('/success'); // Primer preusmeravanja na stranicu za uspešno iznajmljivanje
     },
@@ -79,8 +97,6 @@ export default {
             authorization: localStorage.getItem('token')
           }
         });
-
-        console.log("res", response);
 
         this.vehicles = response.data.vehicles; // Use response.data to get the actual response data
         this.cart =  response.data.vehicles;
