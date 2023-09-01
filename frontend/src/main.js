@@ -12,6 +12,7 @@ import CarRentalObject from "./components/CarRentalObject";
 import VehicleForm from "./components/VehicleForm";
 import Profile from "./components/Profile";
 import EditProfile from "./components/EditProfile";
+import MyCart from "./components/MyCart";
 
 Vue.use(VueRouter);
 
@@ -33,6 +34,18 @@ const routes = [
         path: '/rent-a-car/:id',
         component: CarRentalObject,
         props: true
+    },
+    {
+        path: '/mycart/',
+        component: MyCart,
+        beforeEnter: (to, from, next) => {
+            const userRole = localStorage.getItem('role');
+            if (userRole === 'USER') {
+                next();
+            } else {
+                next('/');
+            }
+        }
     },
     {
         path: '/vehicle/:objectid',

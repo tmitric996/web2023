@@ -33,7 +33,7 @@
                       <p class="card-text"><strong>Broj vrata:</strong> {{ car.numberOfDoors }}</p>
                       <p class="card-text"><strong>Broj osoba:</strong> {{ car.numberOfPersons }}</p>
                       <p class="card-text"><strong>Opis:</strong> {{ car.description }}</p>
-                      <button class="btn btn-primary">Dodaj u korpu</button>
+                      <button class="btn btn-primary" @click="addToCart(car.id)" >Dodaj u korpu</button>
                     </div>
                   </div>
                 </div>
@@ -98,6 +98,23 @@ export default {
       }
 
     },
+    addToCart(id) {
+      console.log("cartVehicles")
+
+      let cartVehicles = JSON.parse(localStorage.getItem('vehicles')) || "";
+      console.log("cartVehicles",cartVehicles, id)
+      // if (cartVehicles === []) {
+        cartVehicles =cartVehicles+ id+",";
+      // }
+      // cartVehicles.concat(id);
+      console.log("cartVehicles",cartVehicles.length)
+      localStorage.setItem('vehicles', JSON.stringify(cartVehicles));
+      this.$emit('cart-updated', cartVehicles.length);
+      alert("Vozilo dodato u korpu!")
+      window.location.reload();
+
+
+    },
 
     async performSearch() {
       try {
@@ -105,14 +122,16 @@ export default {
         // Pozovite API ili bazu podataka sa ovim datumima
         // Nakon što dobijete rezultate, ažurirajte prikaz na osnovu tih rezultata
         // Primer:
-        console.log(headerModule.header)
 
         const response = await axios.post(this.basePath + 'searchVehicles', {
             start_date: this.searchStartDate,
             end_date: this.searchEndDate,
             objectId: this.id
         },{
-          headers: headerModule.header});
+          headers: {
+            authorization : localStorage.getItem('token')
+          }
+        });
         console.log(response.data)
         this.carList = response.data.vehicles;
       } catch (error) {

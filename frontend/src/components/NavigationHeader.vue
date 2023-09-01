@@ -9,8 +9,10 @@
       <div class="user-menu">
         <div class="icons">
           <router-link v-if="isUser" :to="'/mycart'" class="icon">
-            <i class="bi bi-cart4 icon"></i>
-          </router-link>
+          <i class="bi bi-cart4 icon" id="cart-icon">
+            <span class="badge" id="cart-badge">{{ notificationCount }}</span>
+          </i>
+        </router-link>
           <router-link v-if="isLoggedIn" :to="'/profile'" class="icon">
             <i class="bi bi-person-square icon"></i>
           </router-link>
@@ -24,8 +26,14 @@
 
 <script>
 export default {
+  data() {
+    return {
+      notificationCount: localStorage.getItem('vehicles')? JSON.stringify(localStorage.getItem('vehicles')).split(',').length : 0,
+    };
+  },
   computed: {
     isLoggedIn() {
+      console.log("notificationCount",this.notificationCount,JSON.stringify(localStorage.getItem('vehicles')).split(',').length )
       return localStorage.getItem('username') !== null;
     },
     isUser() {
@@ -35,6 +43,20 @@ export default {
       } else
       return false;
     }
+  },
+  mounted() {
+    window.addEventListener('storage', this.handleStorageChange);
+
+    // Pretplatite se na događaj 'cart-updated' koji emituje komponenta koja dodaje vozila
+    this.$root.$on('cart-updated', (count) => {
+      this.notificationCount = count;
+    });
+  },
+  beforeDestroy() {
+    window.removeEventListener('storage', this.handleStorageChange);
+
+    // Uklonite pretplatu na događaj pri uništavanju komponente
+    this.$root.$off('cart-updated');
   },
   methods: {
     goToHome() {
@@ -50,7 +72,17 @@ export default {
     logout() {
       localStorage.clear();
       location.reload();
-    }
+    },
+    handleStorageChange(event) {
+      console.log("udje",  this.notificationCount, event)
+
+      if (event.key === 'vehicles') {
+        const vehicles = JSON.parse(localStorage.getItem('vehicles')) || [];
+        this.notificationCount = vehicles.length;
+console.log("udje",  this.notificationCount)
+
+      }
+    },
   }
 };
 </script>

@@ -39,6 +39,12 @@ class vehicleService {
         saveVehicles(newVehicel);
     }
 
+    getVehicles(idArray) {
+        const allVehicles = getVehicles()
+        const filteredVehicles = allVehicles.filter(vehicle => idArray.includes(vehicle.id));
+
+        return filteredVehicles;
+    }
     updateVehicle(vehicleData, id) {
         try {
             const vehicles = getVehicles();

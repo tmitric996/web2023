@@ -60,6 +60,17 @@ const vehicleController = {
         }
     },
 
+    getVehicles(req, res) {
+        const ids = req.params.ids;
+        authService.verifyToken(req, res, 'USER');
+        if (res.statusCode === 401) {
+            return;
+        }
+        const idArray = ids.slice(0, -1).split('-').map(str => parseInt(str, 10));
+        const vehicles =  vehicleService.getVehicles(idArray);
+        console.log("vehicles",vehicles)
+        return res.status(200).json({ vehicles: vehicles });
+    },
     deleteVehicle(req, res) {
         authService.verifyToken(req, res, 'MANAGER');
         if (res.statusCode === 401) {

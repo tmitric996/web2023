@@ -1,0 +1,112 @@
+<template>
+  <div>
+    <NavigationHeader />
+    <div class="container mt-5">
+      <h2 class="mb-4 text-center">Moj Korpa</h2>
+      <div v-for="(item, index) in cart" :key="index" class="card p-4 shadow-lg mb-4">
+        <div class="d-flex">
+          <div class="col-md-4">
+            <img :src="'/assets/images/' + item.image" class="img-fluid" alt="Car Image">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{ item.name }}</h5>
+              <p class="card-text"><strong>Cena: {{ item.price }} RSD</strong></p>
+              <div class="d-flex align-items-center">
+                <button @click="decrementQuantity(index)" class="btn btn-sm btn-secondary">-</button>
+                <p class="mx-2">{{ item.quantity }}</p>
+                <button @click="incrementQuantity(index)" class="btn btn-sm btn-secondary">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-end">
+        <p><strong>Ukupna Cena: {{ total }} RSD</strong></p>
+        <button @click="rentVehicles" class="btn btn-primary">Iznajmi</button>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import axios from "axios";
+import baseMixin from "../common/baseMixin";
+import NavigationHeader from "./NavigationHeader";
+
+export default {
+  mixins: [baseMixin],
+  components: {
+    NavigationHeader,
+  },
+  data() {
+    return {
+      cart: [], // Niz za čuvanje stavki u korpi
+    };
+  },
+  computed: {
+    total() {
+      // Računanje ukupne cene na osnovu stavki u korpi
+      // return this.cart.reduce((total, item) => total + item.price * item.quantity, 0);
+    },
+  },
+  methods: {
+    incrementQuantity(index) {
+      // Povećavanje količine za određeni automobil
+      this.cart[index].quantity++;
+    },
+    decrementQuantity(index) {
+      // Smanjivanje količine za određeni automobil
+      if (this.cart[index].quantity > 1) {
+        this.cart[index].quantity--;
+      }
+    },
+    rentVehicles() {
+      // Implementirajte logiku za iznajmljivanje vozila
+      // Ovde možete poslati podatke na server ili uraditi bilo šta što je potrebno za iznajmljivanje
+      // Nakon iznajmljivanja, možete isprazniti korpu i preusmeriti korisnika na odgovarajuću stranicu
+      this.cart = [];
+      // this.$router.push('/success'); // Primer preusmeravanja na stranicu za uspešno iznajmljivanje
+    },
+    async fetchCarVehicles() {
+      const cartItems = JSON.parse(localStorage.getItem('vehicles')) || [];
+
+      console.log("cartItems", cartItems.replaceAll(',', '-').slice(0, -1).split('-').map(str => parseInt(str, 10)));
+
+      try {
+        const response = await axios.get(this.basePath + 'vehicles/cart/'+cartItems.replaceAll(',', '-'), {
+          headers: {
+            authorization: localStorage.getItem('token')
+          }
+        });
+
+        console.log("res", response);
+
+        this.vehicles = response.data.vehicles; // Use response.data to get the actual response data
+        this.cart =  response.data.vehicles;
+
+      } catch (error) {
+        console.error('Error loading vehicles:', error);
+      }
+
+    }
+
+  },
+  async created() {
+    await this.fetchCarVehicles();
+
+    // Učitavanje stavki iz lokalnog skladišta (localStorage) kada se komponenta kreira
+
+  },
+  watch: {
+    cart: {
+      // Praćenje promena u korpi i ažuriranje lokalnog skladišta
+      handler(newCart) {
+        localStorage.setItem('cart', JSON.stringify(newCart));
+      },
+      deep: true,
+    },
+  },
+};
+</script>
+

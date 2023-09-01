@@ -24,6 +24,8 @@ router.get('/facility/:id', carRentalObjectController.getFacilityById);
 router.post('/vehicle', vehicleController.addVehicle);
 router.put('/vehicle/:id', vehicleController.updateVehicle);
 router.delete('/vehicle/:id', vehicleController.deleteVehicle);
+router.get('/vehicles/cart/:ids', vehicleController.getVehicles);
+
 
 router.post('/order', orderController.addOrder);
 router.get('/order/customer/:id', orderController.getUserOrder);
