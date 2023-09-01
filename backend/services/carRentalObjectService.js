@@ -57,7 +57,6 @@ class carRentalObjectService {
 
     saveCarRentalObject(carRentalObject) {
         const objects = getCarRentalObjects();
-        console.log('carRentalObject',carRentalObject);
         objects.push(carRentalObject);
         saveCarRentalObjects(objects);
     }
@@ -99,11 +98,9 @@ class carRentalObjectService {
             if (indexToUpdate === -1) {
                 return false;
             }
-            console.log("objectData,", objectData);
 
             const updatedObject = { ...objects[indexToUpdate], ...objectData}
             objects[indexToUpdate] = updatedObject;
-            console.log("updatedObject,", updatedObject);
             saveCarRentalObjects(objects);
             return true;
         } catch (error) {

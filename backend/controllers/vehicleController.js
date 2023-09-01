@@ -12,12 +12,10 @@ const vehicleController = {
     addVehicle(req, res) {
         authService.verifyToken(req, res, 'MANAGER');
         if (res.statusCode === 401) {
-            console.log(req);
             return;
         }
         const { brand, model, price, type, rentalObject, transmission, fuelType, consumption, numberOfDoors, numberOfPersons, image, status, description } = req.body;
         if (!brand || !model || !price || !type || !rentalObject || !transmission || !fuelType || !consumption || !numberOfPersons || !image  || !numberOfDoors) {
-           console.log(   !brand, !model, !price, !type, !rentalObject, !transmission, !fuelType, !consumption, !numberOfPersons, !image, !status, !numberOfDoors);
 
             return res.status(400).json({ message: 'Molimo popunite sva polja.' });
         }
@@ -68,7 +66,6 @@ const vehicleController = {
         }
         const idArray = ids.slice(0, -1).split('-').map(str => parseInt(str, 10));
         const vehicles =  vehicleService.getVehicles(idArray);
-        console.log("vehicles",vehicles)
         return res.status(200).json({ vehicles: vehicles });
     },
     deleteVehicle(req, res) {

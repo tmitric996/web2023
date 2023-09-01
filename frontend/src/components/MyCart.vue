@@ -23,8 +23,9 @@
       </div>
       <div class="text-end">
         <p><strong>Ukupna Cena: {{ total }} RSD</strong></p>
-        <button @click="rentVehicles" class="btn btn-primary">Iznajmi</button>
+        <button @click="rentVehicles" class="btn btn-primary" style="margin-bottom: 10px">Iznajmi</button>
       </div>
+      <router-link to="/myorders" class="btn btn-secondary" style="float: right">Istorija porudžbina</router-link>
     </div>
   </div>
 </template>
@@ -88,8 +89,6 @@ export default {
     },
     async fetchCarVehicles() {
       const cartItems = JSON.parse(localStorage.getItem('vehicles')) || [];
-
-      console.log("cartItems", cartItems.replaceAll(',', '-').slice(0, -1).split('-').map(str => parseInt(str, 10)));
 
       try {
         const response = await axios.get(this.basePath + 'vehicles/cart/'+cartItems.replaceAll(',', '-'), {

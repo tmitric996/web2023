@@ -13,6 +13,7 @@ import VehicleForm from "./components/VehicleForm";
 import Profile from "./components/Profile";
 import EditProfile from "./components/EditProfile";
 import MyCart from "./components/MyCart";
+import Orders from "./components/Orders";
 
 Vue.use(VueRouter);
 
@@ -66,6 +67,18 @@ const routes = [
         beforeEnter: (to, from, next) => {
             const userRole = localStorage.getItem('role');
             if (userRole) {
+                next();
+            } else {
+                next('/');
+            }
+        }
+    },
+    {
+        path: '/myorders',
+        component: Orders,
+        beforeEnter: (to, from, next) => {
+            const userRole = localStorage.getItem('role');
+            if (userRole === 'USER' || userRole === 'MANAGER') {
                 next();
             } else {
                 next('/');

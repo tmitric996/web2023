@@ -99,15 +99,12 @@ export default {
 
     },
     addToCart(id) {
-      console.log("cartVehicles")
 
       let cartVehicles = JSON.parse(localStorage.getItem('vehicles')) || "";
-      console.log("cartVehicles",cartVehicles, id)
       // if (cartVehicles === []) {
         cartVehicles =cartVehicles+ id+",";
       // }
       // cartVehicles.concat(id);
-      console.log("cartVehicles",cartVehicles.length)
       localStorage.setItem('vehicles', JSON.stringify(cartVehicles));
       this.$emit('cart-updated', cartVehicles.length);
       alert("Vozilo dodato u korpu!")
@@ -132,7 +129,6 @@ export default {
             authorization : localStorage.getItem('token')
           }
         });
-        console.log(response.data)
         this.carList = response.data.vehicles;
       } catch (error) {
         console.error('Error performing search:', error);

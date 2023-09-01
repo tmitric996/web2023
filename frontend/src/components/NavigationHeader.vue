@@ -33,11 +33,9 @@ export default {
   },
   computed: {
     isLoggedIn() {
-      console.log("notificationCount",this.notificationCount,JSON.stringify(localStorage.getItem('vehicles')).split(',').length )
       return localStorage.getItem('username') !== null;
     },
     isUser() {
-      console.log(localStorage.getItem('role'))
       if (localStorage.getItem('role')){
         return (localStorage.getItem('role')==='USER');
       } else

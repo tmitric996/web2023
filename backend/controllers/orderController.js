@@ -17,7 +17,6 @@ const orderController = {
         }
         const { vehicles, carRentalObject, dateAndTime, duration, price, customer, status } = req.body;
         if (!vehicles || !carRentalObject || !dateAndTime || !duration || !price || !customer || !status ) {
-            console.log("ppppp",vehicles,carRentalObject, dateAndTime, duration, price, customer, status,req)
             return res.status(400).json({ message: 'Molimo popunite sva polja.' });
         }
         const user = authService.getUserByUsername(customer);
@@ -41,9 +40,10 @@ const orderController = {
         if (res.statusCode === 401) {
             return;
         }
-        const id = parseInt(req.params.id);
+        const username = req.params.id;
+        const user = authService.getUserByUsername(username);
 
-        const orders = orderService.getOrdersForUser(id);
+        const orders = orderService.getOrdersForUser(user.id);
         return res.status(200).json({ orders: orders });
     },
 
@@ -66,7 +66,6 @@ const orderController = {
         const id = req.body.objectId;
         const startDate = parseInt(req.body.start_date);
         const endDate = parseInt(req.body.end_date);
-console.log('objectId',id)
         const vehicles = orderService.getAvailableVehiclesForPeriod(id, startDate, endDate);
         return res.status(200).json({ vehicles:vehicles });
 

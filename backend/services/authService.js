@@ -46,7 +46,6 @@ const getUserBy= (param, id) => {
         const userData = fs.readFileSync(usersFilePath, 'utf8');
         const users = JSON.parse(userData);
         const user = users.filter(user => user[param] === id);
-console.log("user", user)
         return user || null;
     } catch (error) {
         return null;
@@ -61,6 +60,7 @@ const saveUsers = (users) => {
 class AuthService {
     getUserByUsername(username) {
         const users = getUsers();
+        console.log("userrrr", username)
         return users.find((user) => user.username === username);
     }
 
@@ -74,7 +74,6 @@ class AuthService {
 
             const updatedUser = { ...users[indexToUpdate], ...data}
             users[indexToUpdate] = updatedUser;
-            console.log("updatedObject,", updatedUser);
             saveUsers(users);
             return true;
         } catch (error) {
@@ -100,7 +99,6 @@ class AuthService {
 
     verifyToken(req, res, permission) {
         const token = req.headers.authorization;
-        console.log('objectIdreq',req)
 
         if (!token) {
             return res.status(401).json({ error: 'Nedostaje JWT token' });

@@ -64,7 +64,6 @@ class vehicleService {
 
     getAvailableForBoject(id) {
         const vehicles = getVehicles();
-        console.log("vehicles", vehicles, id);
         return vehicles.filter((vehicle) => vehicle.status === 'available' && parseInt(vehicle.rentalObject) === parseInt(id));
 
     }
