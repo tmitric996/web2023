@@ -1,6 +1,7 @@
 <template>
-  <div class="container mt-5" style="max-width: 500px;">
+  <div>
     <NavigationHeader />
+  <div class="container mt-5" style="max-width: 500px;">
     <div class="card p-4 shadow-lg">
       <h2 class="mb-4 text-center">Unos Podataka o Vozilu</h2>
       <form @submit.prevent="createVehicle">
@@ -53,6 +54,7 @@
         </div>
       </form>
     </div>
+  </div>
   </div>
 </template>
 

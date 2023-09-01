@@ -1,6 +1,7 @@
 <template>
-  <div class="container mt-5">
+  <div>
     <NavigationHeader />
+    <div class="container mt-5">
     <h2 class="mb-4 text-center">Objekti za iznajmljivanje vozila</h2>
 
     <div class="d-flex justify-content-between mb-4">
@@ -47,6 +48,8 @@
       </div>
     </div>
   </div>
+  </div>
+
 </template>
 
 <script>

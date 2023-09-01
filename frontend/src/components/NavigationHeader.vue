@@ -18,7 +18,8 @@
           </router-link>
         </div>
         <button v-if="isLoggedIn" @click="logout">Logout</button>
-        <button v-else @click="login">Login</button>
+        <button v-if="!isLoggedIn && showRegister" @click="register">Register</button>
+        <button v-if="!isLoggedIn && !showRegister" @click="login">Login</button>
       </div>
     </div>
   </nav>
@@ -34,6 +35,13 @@ export default {
   computed: {
     isLoggedIn() {
       return localStorage.getItem('username') !== null;
+    },
+    showRegister() {
+      console.log("ss",window.location.href.includes('login'))
+      if (window.location.href.includes('login')){
+        return true;
+      }
+      return false;
     },
     isUser() {
       if (localStorage.getItem('role')){
@@ -66,6 +74,9 @@ export default {
     },
     login() {
       this.$router.push('/login');
+    },
+    register() {
+      this.$router.push('/register');
     },
     logout() {
       localStorage.clear();

@@ -1,6 +1,7 @@
 <template>
-  <div class="container mt-5">
+  <div>
     <NavigationHeader />
+  <div class="container mt-5">
     <div class="card p-4 shadow-lg">
       <h2 class="mb-4 text-center">{{ selectedObject.name }}</h2>
       <div class="d-flex mb-3">
@@ -46,6 +47,7 @@
         </div>
       </div>
     </div>
+  </div>
   </div>
 </template>
 

@@ -1,6 +1,7 @@
 <template>
-  <div class="container mt-5" style="max-width: 400px;">
+  <div>
     <NavigationHeader />
+  <div class="container mt-5" style="max-width: 400px;">
     <div class="card p-4 shadow-lg">
       <h2 v-if="!carRentalObject && userRole !== 'ADMIN'" class="mb-4 text-center">Registration Form</h2>
       <h2 v-if="!carRentalObject && userRole === 'ADMIN'" class="mb-4 text-center">Register manager</h2>
@@ -91,6 +92,7 @@
         </div>
       </div>
     </div>
+  </div>
   </div>
 </template>
 

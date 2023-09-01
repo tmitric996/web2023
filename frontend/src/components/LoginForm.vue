@@ -1,4 +1,6 @@
 <template>
+  <div>
+    <NavigationHeader />
   <div class="container mt-5" style="max-width: 400px;">
     <div class="card p-4 shadow-lg">
       <h2 class="mb-4 text-center">Login Form</h2>
@@ -42,15 +44,20 @@
       </div>
     </div>
   </div>
+  </div>
 </template>
 
 <script>
 import '../../public/assets/styles.css';
 import axios from "axios";
 import baseMixin from '../common/baseMixin.js';
+import NavigationHeader from "./NavigationHeader";
 
 export default {
   mixins: [baseMixin],
+  components: {
+    NavigationHeader
+  },
   data() {
     return {
       showPassword : true,
